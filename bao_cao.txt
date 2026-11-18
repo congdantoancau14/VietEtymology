@@ -1,0 +1,171 @@
+Tổng số mục: 23422
+Số dòng đọc được theo định dạng: {'tiếng Việt': 38156, 'tiếng Anh': 31484}
+Bỏ qua: {'tên riêng': 930, 'mục chữ Hán/Nôm': 6055}
+
+LƯU Ý: chưa có CC-CEDICT (tệp cedict_ts.u8): tắt quy tắc R1f.
+
+Chưa xác định: 10093
+Hán Việt: 4811
+Từ láy: 2833
+Từ ghép: 1872
+Châu Âu và khác: 1153
+Hán Việt cổ: 762
+Nam Á: 536
+Vay Hán (chưa rõ tầng): 413
+Vietic: 397
+Việt–Mường: 189
+Tượng thanh: 104
+Ngôn ngữ khác: 89
+Tày–Thái: 72
+Vay Hán muộn: 61
+Chăm, Mã Lai, Khmer: 28
+Phụ tố cổ: 9
+
+Theo quy tắc: R0=10093, R3=1530, R1a=2104, R3d=218, R2b=377, R4b=1973, R5=1872, R1a+U=2662, R1b=762, R1g=6, R2a=281, R4c=860, R4a=104, R2d=154, R2c=141, R1e=38, R1c=1, R2f=169, R2e=68, R5b=9
+Cần người rà: 2954
+Chờ điền: 10093
+Trong số chờ điền: 5498 mục nhiều âm tiết (giữ nguyên vì không bẻ được), 4595 mục một âm tiết.
+
+Danh mục hay gặp trong Wiktionary tiếng Việt (để bổ sung quy tắc):
+  38101  Mục từ tiếng Việt
+  31639  Mục từ dùng cấu trúc mục từ Wiktionary cũ
+  29372  Mục từ có cách phát âm IPA tiếng Việt
+  14331  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Danh từ
+  14268  Danh từ tiếng Việt
+  10633  Trang có đề mục ngôn ngữ
+   8988  Động từ tiếng Việt
+   7778  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Động từ
+   6514  Tính từ tiếng Việt
+   6424  Trang có 1 đề mục ngôn ngữ
+   6267  Mục từ Hán-Việt
+   6140  Mục từ tiếng Việt có chữ Nôm
+   5629  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Tính từ
+   4668  Mục từ chưa xếp theo loại từ
+   4014  Trang có 0 đề mục ngôn ngữ
+   3357  Mục từ Hán-Việt có từ nguyên Hán chưa được tạo bài
+   1822  Từ láy tiếng Việt
+   1771  Mục từ có hộp bản dịch
+   1573  Từ ghép tiếng Việt
+   1118  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Phó từ
+   1116  Phó từ tiếng Việt
+    981  Mục từ có bản dịch tiếng Anh
+    827  Bảng dịch không chú thích ngữ nghĩa
+    332  Từ dẫn xuất từ tiếng Trung Quốc tiếng Việt
+    323  Mục từ có bản dịch tiếng Nhật
+    320  Mục từ có bản dịch tiếng Pháp
+    295  Mục từ có bản dịch tiếng Quan Thoại
+    228  Mục từ có bản dịch tiếng Nga
+    210  Mục từ có bản dịch tiếng Tây Ban Nha
+    207  Mục từ có bản dịch tiếng Đức
+    200  Mục từ có bản dịch tiếng Hà Lan
+    198  Từ dẫn xuất từ tiếng Việt-Mường nguyên thủy tiếng Việt
+    198  Từ kế thừa từ tiếng Việt-Mường nguyên thủy tiếng Việt
+    173  Mục từ có bản dịch tiếng Phần Lan
+    172  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Thán từ
+    151  Thán từ tiếng Việt
+    147  Mục từ có liên kết âm thanh tiếng Việt
+    143  Mục từ có bản dịch tiếng Triều Tiên
+    141  Mục từ có bản dịch tiếng Bồ Đào Nha
+    138  Mục từ có bản dịch tiếng Hungary
+    135  Mục từ có bản dịch tiếng Ba Lan
+    131  Mục từ có bản dịch tiếng Ý
+    127  Toán học
+    123  Mục từ có bản dịch tiếng Catalan
+    120  Mục từ có bản dịch tiếng Thụy Điển
+    120  Từ dẫn xuất từ tiếng Pháp tiếng Việt
+    119  Mục từ có bản dịch tiếng Thái
+    118  Danh từ có loại từ con tiếng Việt
+    117  Điệp thức tiếng Việt
+    115  Từ vay mượn từ tiếng Pháp tiếng Việt
+    114  Mục từ có bản dịch tiếng Ả Rập
+    103  Vật lý học
+    103  Mục từ có bản dịch tiếng Gruzia
+    103  Mục từ có bản dịch tiếng Đan Mạch
+    101  Trang có 2 đề mục ngôn ngữ
+    100  Đại từ tiếng Việt
+     96  Mục từ có bản dịch tiếng Quảng Đông
+     95  Mục từ có bản dịch tiếng Hy Lạp
+     94  Mục từ có bản dịch tiếng Armenia
+     94  Mục từ có bản dịch tiếng Miến Điện
+     91  Mục từ có bản dịch tiếng Estonia
+     90  Mục từ có bản dịch tiếng Bulgari
+     90  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Đại từ
+     90  Mục từ có bản dịch tiếng Séc
+     88  Mục từ có bản dịch tiếng Thổ Nhĩ Kỳ
+     86  Mục từ có bản dịch tiếng Khmer
+     84  Mục từ có bản dịch tiếng Quốc tế ngữ
+     82  Mục từ có bản dịch tiếng Ukraina
+     80  Mục từ có bản dịch tiếng Ba Tư
+     79  Mục từ có bản dịch tiếng Litva
+     78  Mục từ có bản dịch tiếng Hindi
+     77  Mục từ có bản dịch tiếng Lào
+     75  Mục từ có bản dịch tiếng Rumani
+     75  Mục từ có bản dịch tiếng Latvia
+     73  Mục từ có bản dịch tiếng Iceland
+     73  Danh từ có loại từ cái tiếng Việt
+     72  vi:Trái cây
+     71  Mục từ có bản dịch tiếng Indonesia
+     70  Mục từ có bản dịch tiếng Mã Lai
+     69  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Liên từ
+
+Mẫu từ nguyên hay gặp trong Wiktionary tiếng Anh, kèm mã ngôn ngữ (để bổ sung quy tắc):
+  12320  vi-etym-sino
+  11229  categorize
+  10826  etymid
+   6224  com
+   2640  yesno
+   1317  der zh
+    962  inh mkh-vie-pro
+    620  af
+    599  ncog
+    569  IPAfont
+    544  bor fr
+    544  doublet
+    539  compound
+    511  ltc-l
+    488  cog mtq
+    467  glossary
+    448  vi-etym-redup
+    338  cog km
+    254  cal zh
+    253  vi-l
+    252  com+
+    237  bor ja
+    215  inh aav-pro
+    214  och-l
+    196  inh mkh-pro
+    189  cog pac
+    184  cog zh
+    175  cog th
+    169  l/vi/Latn
+    163  cog mnw
+    158  cog scb
+    155  bor+ fr
+    154  zh-l
+    153  inh+ mkh-vie-pro
+    152  cog tou
+    139  cog bdq
+    136  cog aem
+    125  blend
+    114  cog ja
+    108  bor en
+    104  rdp
+     99  cal en
+     98  q
+     97  vi-link
+     95  der och
+     87  cog mkh-kat-pro
+     86  m-g
+     86  lit
+     84  l/vi/Hani
+     79  cog kha
+     76  der la-new
+     74  clipping
+     73  cog kjg
+     73  vchem
+     68  calque zh
+     66  cog thm
+     66  der ltc
+     61  cog vi
+     58  wp
+     58  inh mkh-mvi
