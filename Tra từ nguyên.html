@@ -211,7 +211,7 @@ function showD(){
   d.className="d "+e._g;
   d.innerHTML='<button class="x" data-x="close" aria-label="Đóng">×</button><h2>'+esc(e.w)+(e.user?' <span class="tag">chưa duyệt</span>':"")+(e.todo?' <span class="tag">chờ điền</span>':"")+'</h2>'
    +'<p class="mute" style="margin:4px 0 10px">'+esc(e.gloss)+'</p><div style="display:flex;flex-wrap:wrap;gap:6px">'+e.L.map(l=>'<span class="chip '+l[0]+'">'+G[l[0]][0]+' › '+esc(l[1])+'</span>').join("")+'</div>'
-   +'<dl><dt>Chữ Hán gốc</dt><dd class="hz">'+E(e.han)+'</dd><dt>Dạng viết CJK</dt><dd class="hz">'+E((e.cjk||[]).join("  "))+'</dd><dt>Phát âm</dt><dd>'+E(e.ipa)+'</dd><dt>Độ tin cậy</dt><dd><span class="dots">'+dots(e.conf)+'</span> '+CONF[e.conf]+(e.review?' · cần rà soát':'')+'</dd><dt>Dạng tái lập</dt><dd>'+E(e.recon)+'</dd><dt>Đồng nguyên</dt><dd>'+E(e.cog)+'</dd><dt>Cặp song song</dt><dd>'+(lk(e.doublets)||E(""))+'</dd><dt>Thành tố</dt><dd>'+(lk(e.parts)||E(""))+'</dd><dt>Ghi chú</dt><dd>'+E(e.note)+'</dd><dt>Nguồn</dt><dd>'+E(e.src)+'</dd><dt>Quy tắc</dt><dd>'+E(e.rule)+'</dd></dl>'+(e.pending&&e._cid?'<p style="margin-top:16px"><button class="save" data-x="ok" data-c="'+esc(e._cid)+'">Duyệt</button> <button class="ghost" data-x="rm" data-c="'+esc(e._cid)+'">Xoá</button></p>':"");
+   +'<dl><dt>Chữ Hán gốc</dt><dd class="hz">'+E(e.han)+'</dd><dt>Dạng viết CJK</dt><dd class="hz">'+E((e.cjk||[]).join("  "))+'</dd><dt>Phát âm</dt><dd>'+E(e.ipa)+'</dd><dt>Độ tin cậy</dt><dd><span class="dots">'+dots(e.conf)+'</span> '+CONF[e.conf]+(e.review?' · cần rà soát':'')+'</dd><dt>Dạng tái lập</dt><dd>'+E(e.recon)+'</dd><dt>Đồng nguyên</dt><dd>'+E(e.cog)+'</dd><dt>Cặp song song</dt><dd>'+(lk(e.doublets)||E(""))+'</dd><dt>Thành tố</dt><dd>'+(lk(e.parts)||E(""))+'</dd><dt>Biến thể</dt><dd>'+E((e.variants||[]).join(", "))+'</dd><dt>Ghi chú</dt><dd>'+E(e.note)+'</dd><dt>Nguồn</dt><dd>'+E(e.src)+'</dd><dt>Quy tắc</dt><dd>'+E(e.rule)+'</dd></dl>'+(e.pending&&e._cid?'<p style="margin-top:16px"><button class="save" data-x="ok" data-c="'+esc(e._cid)+'">Duyệt</button> <button class="ghost" data-x="rm" data-c="'+esc(e._cid)+'">Xoá</button></p>':"");
 }
 async function exp(t){
   let data,name="tu-nguyen-"+R.length+"."+t;
@@ -230,20 +230,25 @@ async function ungz(z){const b=Uint8Array.from(atob(z),c=>c.charCodeAt(0)),d=new
   return new TextDecoder().decode(await new Response(d.readable).arrayBuffer())}
 function chunks(list){const out=[];let cur=[],len=0;for(const e of list){const n=JSON.stringify(e).length;if(len+n>80000&&cur.length){out.push(cur);cur=[];len=0}cur.push(e);len+=n}if(cur.length)out.push(cur);return out}
 const rebuild=()=>{prep();refresh();showD()};
+const IDB=()=>new Promise((res,rej)=>{const q=indexedDB.open("tunguyen",1);q.onupgradeneeded=()=>q.result.createObjectStore("kv");q.onsuccess=()=>res(q.result);q.onerror=()=>rej(q.error)});
+async function cacheSet(k,v){try{const d=await IDB();await new Promise((res,rej)=>{const t=d.transaction("kv","readwrite");t.objectStore("kv").put(v,k);t.oncomplete=res;t.onerror=()=>rej(t.error)})}catch(e){}}
+async function cacheGet(k){try{const d=await IDB();return await new Promise((res,rej)=>{const r=d.transaction("kv").objectStore("kv").get(k);r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)})}catch(e){return null}}
+async function saveCache(){if(BASE===SEED)return;try{const j=JSON.stringify(BASE.map(clean));await cacheSet("base",HAS_CS?{ts:META_TS||Date.now(),z:await gz(j)}:{ts:META_TS||Date.now(),j})}catch(e){}}
+async function loadCache(){const c=await cacheGet("base");if(!c)return false;try{BASE=JSON.parse(c.z?await ungz(c.z):c.j);DEMO=false;META_TS=c.ts||0;return true}catch(e){return false}}
 async function loadBase(m){
   say("Đang tải dữ liệu…");
   const snap=await db.collection("chunks").get();
   const parts=snap.docs.map(d=>d.data()).filter(p=>p.ts===m.ts).sort((a,b)=>a.i-b.i);
   if(parts.length<m.n)throw new Error("incomplete");
   let all=[];for(const p of parts)all=all.concat(JSON.parse(p.z?await ungz(p.z):p.j));
-  BASE=all;DEMO=false;say("");rebuild();
+  BASE=all;DEMO=false;say("");rebuild();saveCache();
 }
 async function initDb(){
   try{db=window.claude&&await claude.use("db")}catch(e){db=null}
   if(!db){say("Chưa có lưu trữ chung: dữ liệu chỉ nằm trong phiên này.");return}
   DBOK=true;const tm=setTimeout(()=>say("Chưa kết nối được lưu trữ chung sau 10 giây. Dữ liệu có thể chưa mới nhất."),10000),ok=()=>clearTimeout(tm);
-  db.doc("meta/main").onSnapshot(s=>{ok();const m=s.exists?s.data():null;
-    if(m&&m.n&&m.ts!==META_TS){META_TS=m.ts;loadBase(m).catch(()=>{META_TS=0;say("Chưa đọc được dữ liệu đã lưu (có thể đang có đợt nạp). Tải lại trang sau ít phút.")})}},()=>{ok();say("Không đọc được lưu trữ chung.")});
+  db.doc("meta/main").onSnapshot(s=>{ok();const m=s.exists?s.data():null;if(!(m&&m.n&&m.ts>META_TS)&&$("#msg").textContent.startsWith("Đang dùng bản lưu"))say("");
+    if(m&&m.n&&m.ts>META_TS){const prev=META_TS;META_TS=m.ts;loadBase(m).catch(()=>{META_TS=prev;say("Chưa đọc được dữ liệu đã lưu (có thể đang có đợt nạp). Tải lại trang sau ít phút.")})}},()=>{ok();say("Không đọc được lưu trữ chung.")});
   db.collection("approved").onSnapshot(s=>{APPR=s.docs.map(d=>d.data().e).filter(Boolean);rebuild()},()=>{});
   db.collection("contrib").onSnapshot(s=>{PEND=s.docs.map(d=>Object.assign({},d.data().e,{pending:1,user:true,_cid:d.id}));rebuild()},()=>{});
 }
@@ -253,7 +258,7 @@ async function imp(f){
   let ok=a.filter(e=>e&&e.id&&e.w&&Array.isArray(e.L)&&e.L[0]&&G[e.L[0][0]]).map(e=>({...clean(e),conf:e.conf|0}));
   if(!ok.length)return say("Không có mục hợp lệ trong tệp.");
   if($("#mg").checked&&BASE!==SEED){const m=new Map(BASE.map(e=>[e.id,clean(e)]));ok.forEach(e=>m.set(e.id,e));ok=[...m.values()]}
-  if(!DBOK){BASE=ok;DEMO=false;rebuild();return say("Đã nạp "+nf(ok.length)+" mục vào phiên này. Chưa có lưu trữ chung nên sẽ mất khi tải lại.")}
+  if(!DBOK){BASE=ok;DEMO=false;META_TS=Date.now();rebuild();saveCache();return say("Đã nạp "+nf(ok.length)+" mục và lưu trong trình duyệt này. Chưa có lưu trữ chung nên người khác chưa thấy.")}
   try{
     const cs=chunks(ok),ts=Date.now(),old=await db.collection("chunks").get();
     for(let k=0;k<cs.length;k+=4){
@@ -262,8 +267,8 @@ async function imp(f){
       say("Đang ghi "+Math.min(k+4,cs.length)+"/"+cs.length+" khối…")}
     await Promise.all(old.docs.filter(d=>d.data().i>=cs.length).map(d=>db.doc("chunks/"+d.id).delete()));
     META_TS=ts;await db.doc("meta/main").set({n:cs.length,count:ok.length,ts});
-    BASE=ok;DEMO=false;rebuild();say("Đã lưu "+nf(ok.length)+" mục vào lưu trữ chung ("+cs.length+" khối).");
-  }catch(x){say("Không ghi được ("+(x&&x.code||"lỗi")+"). Chỉ chủ trang hoặc biên tập viên được nạp dữ liệu; ghi dở thì nạp lại.")}
+    BASE=ok;DEMO=false;rebuild();saveCache();say("Đã lưu "+nf(ok.length)+" mục vào lưu trữ chung ("+cs.length+" khối) và trong trình duyệt này.");
+  }catch(x){META_TS=Date.now();BASE=ok;DEMO=false;rebuild();saveCache();say("Không ghi được lên lưu trữ chung ("+(x&&(x.code||x.message)||"lỗi")+"). Dữ liệu vẫn được giữ trong trình duyệt này. Có thể do thiếu quyền (chỉ chủ trang hoặc biên tập viên được nạp), hạn mức hoặc giới hạn tốc độ.")}
 }
 async function mod(a,c){
   try{const e=PEND.find(x=>x._cid===c);
@@ -298,7 +303,7 @@ $("#f").onsubmit=async ev=>{ev.preventDefault();const f=new FormData(ev.target);
   else{user.push({...e,user:true});try{localStorage.setItem(KEY,JSON.stringify(user))}catch(x){}}
   ev.target.reset();subs();$("#add").open=false;if(!DBOK){rebuild();go(id)}};
 addEventListener("resize",paint);
-prep();refresh();showD();initDb();
+prep();refresh();showD();loadCache().then(ok=>{if(ok){say("Đang dùng bản lưu trong trình duyệt, đang kiểm tra bản mới…");rebuild()}initDb()});
 </script>
 </body>
 </html>

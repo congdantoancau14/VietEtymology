@@ -23,11 +23,11 @@ TAI = {"th", "lo", "tts", "nod", "za", "pcc", "blt", "tyz", "shn"}
 MALAY = {"cjm", "ms", "id", "jv", "km"}
 EURO = {"fr", "en", "ru", "de", "es", "pt", "it", "la", "nl", "pl"}
 SKIP_POS = {"name", "character", "romanization", "phrase", "proverb", "symbol", "hard-redirect"}
-COMPOUND = {"compound", "com", "com+", "affix", "af", "af+"}
+COMPOUND = {"compound", "com", "com+", "affix", "af", "af+", "prefix", "pre", "suffix", "suf", "confix", "con"}
 INH = {"inh", "inh+", "der", "der+"}
 BORK = {"bor", "bor+", "lbor", "slb", "cal", "calque", "clq", "pclq"}
 HANT = {"vi-etym-sino", "der", "bor", "cal", "calque"}   # mẫu có thể chứa chữ Hán gốc trong phần expansion
-RX_HAN = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\U00020000-\U0002fa1f]+")
+RX_HAN = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\U00020000-\U000323af]+")
 VIETIC = {"mtq", "scb", "tou", "aem", "thm"}   # mã Wiktionary của Mường, Chứt; mở rộng nếu cần
 HAN, MUON, TAYTHAI, CHAM, AU, KHAC = ("han", "Vay Hán (chưa rõ tầng)"), ("han", "Vay Hán muộn"), ("vay", "Tày–Thái"), \
     ("vay", "Chăm, Mã Lai, Khmer"), ("vay", "Châu Âu và khác"), ("vay", "Ngôn ngữ khác")
@@ -44,12 +44,18 @@ RX_CAT = re.compile(r"^Từ (vay mượn|dẫn xuất|kế thừa) từ tiếng 
 RX_BOR = re.compile(r"^(?:Từ|Mượn từ|Vay từ|Phiên âm từ|Phiên âm)\s+(?:tiếng\s+)?(" +
                     "|".join(re.escape(k) for k in sorted(LANG_VI, key=len, reverse=True)) + r")(?=[\s,:;.]|$)", re.I)
 HVSYL = set()          # mọi âm Hán Việt trong Unihan (điền khi chạy)
+VARIANTS = collections.defaultdict(list)   # từ lemma -> các biến thể chính tả/phương ngữ
+RX_VAR = [re.compile(x, re.I) for x in (
+    r"^(?:alternative|alternate|obsolete|dated|nonstandard)(?: letter-case)? (?:spelling|form|letter-case form|variant) of (.+?)(?: \(.*)?\.?$",
+    r"^(?:traditional|modern) tone placement spelling of (.+?)\.?$",
+    r"^(?:central|northern|southern)[a-z ]* form of (.+?)(?: \(.*)?\.?$",
+    r"^dạng (?:viết khác|nam việt nam|bắc việt nam|miền [^ ]+) của (.+?)\.?$")]
 ALIAS = {}            # từ Latin -> {"han": [...], "cjk": [...]} lấy từ các mục "Dạng chữ Hán/Nôm của X"
 SKIPPED = collections.Counter()
 RX_ALIAS = re.compile(r"^dạng (chữ hán|nôm) của (.+)$", re.I)
 TONES = {"\u0300", "\u0301", "\u0303", "\u0309", "\u0323"}
 ONS = sorted(["ngh", "ng", "nh", "ph", "th", "tr", "ch", "kh", "gh", "gi", "qu", "b", "c", "d", "đ", "g", "h", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "x"], key=len, reverse=True)
-SCORE = {"R1c": 4, "R1e": 4, "R1f": 4, "R4c": 1, "R2a": 6, "R2b": 6, "R1a+U": 6, "R1a": 5, "R1b": 5, "R2c": 4, "R2d": 3, "R2e": 2, "R2f": 6, "R3d": 4, "R3": 4, "R4a": 3, "R4b": 3, "R5": 2, "R5b": 1, "R0": 0}
+SCORE = {"R1c": 4, "R1e": 4, "R1f": 4, "R4c": 1, "R4d": 3, "R4e": 1, "R2a": 6, "R2b": 6, "R1a+U": 6, "R1a": 5, "R1b": 5, "R2c": 4, "R2d": 3, "R2e": 2, "R2f": 6, "R3d": 4, "R3": 4, "R4a": 3, "R4b": 3, "R5": 2, "R5b": 1, "R0": 0}
 STOP = {"the", "and", "for", "with", "one", "who", "that", "are", "was", "his", "her", "its", "used", "from", "into", "not",
         "of", "to", "or", "in", "as", "be", "an", "như", "của", "là", "một", "các", "có", "và", "để", "trong", "được",
         "những", "cái", "người", "thì", "với", "khi", "này", "đó", "nói", "chung", "hoặc", "cho", "không", "bị", "đã", "sẽ", "rất"}
@@ -204,6 +210,11 @@ def classify_vi(e, w, hv):
         r.update(g="han", sub="Hán Việt", conf=2, rule="R1e", hvsyl=True,
                  note="Từ nguyên giải nghĩa từng thành tố; mọi âm tiết đều có âm Hán Việt trong Unihan.")
         return r
+    mx = re.search(r"\*\s*(fra|eng|rus|deu|ita|spa|lat|zho|cmn|jpn|kor)\s*:", txt)
+    if mx:
+        g, sub = {"zho": HAN, "cmn": HAN, "jpn": KHAC, "kor": KHAC}.get(mx.group(1), AU)
+        r.update(g=g, sub=sub, conf=2, rule="R3", decomp=False, review=g == "han", note="Từ nguyên ghi gốc " + mx.group(1) + " (Wiktionary tiếng Việt).")
+        return r
     for c in e.get("categories") or []:
         mc = RX_CAT.match(c)
         if mc:
@@ -301,6 +312,10 @@ def read_file(path):
             mm = RX_ALIAS.match(((e.get("senses") or [{}])[0].get("glosses") or [""])[0].strip())
             if mm: ALIAS.setdefault(mm.group(2).strip().rstrip("."), {"han": [], "cjk": []})["han" if "hán" in mm.group(1).lower() else "cjk"].append(w0)
             SKIPPED["mục chữ Hán/Nôm"] += 1; continue
+        g0 = ((e.get("senses") or [{}])[0].get("glosses") or [""])[0].strip()
+        vm = next((m for m in (x.match(g0) for x in RX_VAR) if m), None)
+        if vm and vm.group(1).strip() != w0:
+            VARIANTS[vm.group(1).strip()].append(w0); SKIPPED["biến thể (gập vào từ gốc)"] += 1; continue
         if w0[:1].isupper() or w0.startswith("tiếng "):
             SKIPPED["tên riêng"] += 1; continue
         vi = is_vi(e)
@@ -366,6 +381,13 @@ def main(paths, unihan=None, cedict=None):
             if key in CED:
                 r.update(g="han", sub="Hán Việt", conf=2, rule="R1f", hvsyl=True, note="Khớp từ Hán trong CC-CEDICT: " + CED[key])
                 r["meta"]["han"] = r["meta"]["han"] or CED[key]
+        gl0 = r["meta"]["gloss"].lower()
+        if r["rule"] == "R0" and re.match(r"^reduplicant of", gl0):
+            r.update(g="ns", sub="Từ láy", conf=2, rule="R4d", decomp=False, note="Wiktionary ghi là thành tố láy: " + r["meta"]["gloss"])
+        elif r["rule"] == "R0" and re.match(r"^từ mô phỏng|^mô phỏng (?:tiếng|âm)", gl0):
+            r.update(g="tt", sub="Tượng thanh", conf=1, rule="R4e", review=True, decomp=False, note="Suy từ lời giải nghĩa (“mô phỏng…”). Cần rà.")
+        elif r["rule"] == "R0" and "tượng hình" in gl0:
+            r.update(g="tt", sub="Tượng hình", conf=1, rule="R4e", review=True, decomp=False, note="Lời giải nghĩa nhắc đến “tượng hình”. Cần rà.")
         if r["rule"] == "R0" and HVSYL and is_lay(w) and not all_hv(w):
             r.update(g="ns", sub="Từ láy", conf=1, rule="R4c", review=True, decomp=False,
                      note="Suy từ cấu trúc ngữ âm (trùng âm đầu hoặc vần), không phải Wiktionary khẳng định. Cần rà.")
@@ -398,7 +420,7 @@ def main(paths, unihan=None, cedict=None):
         used.add(id_); first.setdefault(w, id_)
         d = {"id": id_, "w": w, "gloss": r["meta"]["gloss"], "han": r["meta"]["han"], "cjk": r["meta"]["cjk"], "ipa": r["meta"]["ipa"], "L": [[r["g"], r["sub"]]], "conf": r["conf"], "recon": r["recon"],
              "cog": "; ".join(r["cog"]), "doublets": r["dbl"], "note": r["note"],
-             "src": "Wiktionary (kaikki.org), CC BY-SA", "rule": r["rule"], "review": r["review"], "parts": r.get("parts", [])}
+             "src": "Wiktionary (kaikki.org), CC BY-SA", "rule": r["rule"], "review": r["review"], "parts": r.get("parts", []), "variants": VARIANTS.get(w, [])[:8]}
         if r["g"] == "cr": d["todo"] = 1; todo_pk.append((w, pk.get((w, n))))
         out.append(d)
     for d in out:
@@ -424,6 +446,10 @@ def main(paths, unihan=None, cedict=None):
     if tmpl:
         rep += ["", "Mẫu từ nguyên hay gặp trong Wiktionary tiếng Anh, kèm mã ngôn ngữ (để bổ sung quy tắc):"] + [f"{n:>7}  {k}" for k, n in tmpl.most_common(60)]
     open("bao_cao.txt", "w", encoding="utf8").write("\n".join(rep))
+    cand = [w for w, _ in todo_pk if " " in w and all_hv(w)]
+    with open("ung_vien_han_viet.txt", "w", encoding="utf8") as f:
+        f.write(f"{len(cand)} mục chờ điền nhiều âm tiết mà MỌI âm tiết đều có âm Hán Việt (chưa khớp CC-CEDICT). Mẫu 200:\n")
+        for w in sorted(cand)[:: max(1, len(cand) // 200)][:200]: f.write(w + "\n")
     import random; random.seed(1)
     with open("mau_chua_xac_dinh.txt", "w", encoding="utf8") as f:
         for w, pp in random.sample(todo_pk, min(150, len(todo_pk))): f.write(w + " | " + (" | ".join(pp) if pp else "") + "\n")

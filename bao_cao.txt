@@ -1,52 +1,34 @@
-Tổng số mục: 23422
-Số dòng đọc được theo định dạng: {'tiếng Việt': 38156, 'tiếng Anh': 31484}
-Bỏ qua: {'tên riêng': 930, 'mục chữ Hán/Nôm': 6055}
+Tổng số mục: 23217
+Số dòng đọc được theo định dạng: {'tiếng Việt': 38068, 'tiếng Anh': 29880}
+Bỏ qua: {'tên riêng': 866, 'biến thể (gập vào từ gốc)': 1726, 'mục chữ Hán/Nôm': 6085}
 
-LƯU Ý: chưa có CC-CEDICT (tệp cedict_ts.u8): tắt quy tắc R1f.
 
-Chưa xác định: 10093
-Hán Việt: 4811
-Từ láy: 2833
-Từ ghép: 1872
-Châu Âu và khác: 1153
-Hán Việt cổ: 762
-Nam Á: 536
-Vay Hán (chưa rõ tầng): 413
-Vietic: 397
-Việt–Mường: 189
-Tượng thanh: 104
-Ngôn ngữ khác: 89
-Tày–Thái: 72
-Vay Hán muộn: 61
-Chăm, Mã Lai, Khmer: 28
-Phụ tố cổ: 9
-
-Theo quy tắc: R0=10093, R3=1530, R1a=2104, R3d=218, R2b=377, R4b=1973, R5=1872, R1a+U=2662, R1b=762, R1g=6, R2a=281, R4c=860, R4a=104, R2d=154, R2c=141, R1e=38, R1c=1, R2f=169, R2e=68, R5b=9
-Cần người rà: 2954
-Chờ điền: 10093
-Trong số chờ điền: 5498 mục nhiều âm tiết (giữ nguyên vì không bẻ được), 4595 mục một âm tiết.
+Theo quy tắc: R0=9146, R3=1546, R1a=2134, R3d=218, R2b=375, R4b=1971, R5=1901, R1a+U=2667, R1b=754, R1g=6, R2a=280, R4c=802, R1f=619, R4a=104, R2d=152, R2c=141, R4e=38, R1e=39, R1c=1, R2f=169, R2e=68, R4d=77, R5b=9
+Cần người rà: 2926
+Chờ điền: 9146
+Trong số chờ điền: 5003 mục nhiều âm tiết (giữ nguyên vì không bẻ được), 4143 mục một âm tiết.
 
 Danh mục hay gặp trong Wiktionary tiếng Việt (để bổ sung quy tắc):
-  38101  Mục từ tiếng Việt
-  31639  Mục từ dùng cấu trúc mục từ Wiktionary cũ
-  29372  Mục từ có cách phát âm IPA tiếng Việt
-  14331  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Danh từ
-  14268  Danh từ tiếng Việt
-  10633  Trang có đề mục ngôn ngữ
-   8988  Động từ tiếng Việt
-   7778  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Động từ
-   6514  Tính từ tiếng Việt
-   6424  Trang có 1 đề mục ngôn ngữ
+  38013  Mục từ tiếng Việt
+  31562  Mục từ dùng cấu trúc mục từ Wiktionary cũ
+  29314  Mục từ có cách phát âm IPA tiếng Việt
+  14291  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Danh từ
+  14248  Danh từ tiếng Việt
+  10607  Trang có đề mục ngôn ngữ
+   8972  Động từ tiếng Việt
+   7755  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Động từ
+   6507  Tính từ tiếng Việt
+   6414  Trang có 1 đề mục ngôn ngữ
    6267  Mục từ Hán-Việt
-   6140  Mục từ tiếng Việt có chữ Nôm
-   5629  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Tính từ
+   6139  Mục từ tiếng Việt có chữ Nôm
+   5614  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Tính từ
    4668  Mục từ chưa xếp theo loại từ
-   4014  Trang có 0 đề mục ngôn ngữ
+   3999  Trang có 0 đề mục ngôn ngữ
    3357  Mục từ Hán-Việt có từ nguyên Hán chưa được tạo bài
    1822  Từ láy tiếng Việt
    1771  Mục từ có hộp bản dịch
    1573  Từ ghép tiếng Việt
-   1118  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Phó từ
+   1117  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Phó từ
    1116  Phó từ tiếng Việt
     981  Mục từ có bản dịch tiếng Anh
     827  Bảng dịch không chú thích ngữ nghĩa
@@ -109,63 +91,63 @@ Danh mục hay gặp trong Wiktionary tiếng Việt (để bổ sung quy tắc)
      69  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Liên từ
 
 Mẫu từ nguyên hay gặp trong Wiktionary tiếng Anh, kèm mã ngôn ngữ (để bổ sung quy tắc):
-  12320  vi-etym-sino
-  11229  categorize
-  10826  etymid
-   6224  com
-   2640  yesno
-   1317  der zh
-    962  inh mkh-vie-pro
+  12276  vi-etym-sino
+  11194  categorize
+  10797  etymid
+   6212  com
+   2604  yesno
+   1303  der zh
+    959  inh mkh-vie-pro
     620  af
-    599  ncog
-    569  IPAfont
-    544  bor fr
-    544  doublet
-    539  compound
-    511  ltc-l
-    488  cog mtq
+    593  ncog
+    548  IPAfont
+    540  bor fr
+    539  doublet
+    537  compound
+    509  ltc-l
+    487  cog mtq
     467  glossary
-    448  vi-etym-redup
+    446  vi-etym-redup
     338  cog km
     254  cal zh
-    253  vi-l
     252  com+
+    243  vi-l
     237  bor ja
     215  inh aav-pro
-    214  och-l
+    213  och-l
     196  inh mkh-pro
     189  cog pac
     184  cog zh
     175  cog th
-    169  l/vi/Latn
     163  cog mnw
+    159  l/vi/Latn
     158  cog scb
-    155  bor+ fr
-    154  zh-l
+    153  bor+ fr
+    153  zh-l
     153  inh+ mkh-vie-pro
-    152  cog tou
+    151  cog tou
     139  cog bdq
     136  cog aem
     125  blend
     114  cog ja
     108  bor en
     104  rdp
-     99  cal en
      98  q
+     98  cal en
      97  vi-link
-     95  der och
+     94  der och
      87  cog mkh-kat-pro
      86  m-g
      86  lit
      84  l/vi/Hani
      79  cog kha
-     76  der la-new
+     75  der la-new
      74  clipping
      73  cog kjg
-     73  vchem
+     71  vchem
      68  calque zh
      66  cog thm
      66  der ltc
-     61  cog vi
+     59  cog vi
      58  wp
-     58  inh mkh-mvi
+     57  inh mkh-mvi
