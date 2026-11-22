@@ -12,20 +12,20 @@
   color-scheme:light;
   --bg:#faf9f7;--surface:#fff;--ink:#1d1d1f;--mute:#5c5c63;--line:#e4e2dd;
   --kt:#1f7a5c;--kt-bg:#e1f1ea;--han:#b3402f;--han-bg:#f8e5e1;--vay:#9a6608;--vay-bg:#f6ebd0;
-  --ns:#2f5fa8;--ns-bg:#e1e9f6;--tt:#7a4a9e;--tt-bg:#ede3f5;--cr:#62626a;--cr-bg:#e9e9ec;
+  --ns:#2f5fa8;--ns-bg:#e1e9f6;--tt:#7a4a9e;--tt-bg:#ede3f5;--cr:#62626a;--cr-bg:#e9e9ec;--bt:#a8467a;--bt-bg:#f5e3ee;
   box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
     color-scheme:dark;--bg:#141416;--surface:#1d1d20;--ink:#ececee;--mute:#a2a2aa;--line:#2f2f35;
     --kt:#5fd0a6;--kt-bg:#16352b;--han:#f08a78;--han-bg:#3b1f1a;--vay:#e5b457;--vay-bg:#38290e;
-    --ns:#7fa9ec;--ns-bg:#192a47;--tt:#c39be6;--tt-bg:#2e2040;--cr:#b0b0b8;--cr-bg:#2a2a2f;
+    --ns:#7fa9ec;--ns-bg:#192a47;--tt:#c39be6;--tt-bg:#2e2040;--cr:#b0b0b8;--cr-bg:#2a2a2f;--bt:#e08ab8;--bt-bg:#3b1f2e;
   }
 }
 :root[data-theme="dark"]{
   color-scheme:dark;--bg:#141416;--surface:#1d1d20;--ink:#ececee;--mute:#a2a2aa;--line:#2f2f35;
   --kt:#5fd0a6;--kt-bg:#16352b;--han:#f08a78;--han-bg:#3b1f1a;--vay:#e5b457;--vay-bg:#38290e;
-  --ns:#7fa9ec;--ns-bg:#192a47;--tt:#c39be6;--tt-bg:#2e2040;--cr:#b0b0b8;--cr-bg:#2a2a2f;
+  --ns:#7fa9ec;--ns-bg:#192a47;--tt:#c39be6;--tt-bg:#2e2040;--cr:#b0b0b8;--cr-bg:#2a2a2f;--bt:#e08ab8;--bt-bg:#3b1f2e;
 }
 *,*::before,*::after{box-sizing:inherit}
 html,body{height:100%}
@@ -36,7 +36,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 .mute{color:var(--mute)}.small{font-size:.85rem}
 .kt{--c:var(--kt);--b:var(--kt-bg)}.han{--c:var(--han);--b:var(--han-bg)}.vay{--c:var(--vay);--b:var(--vay-bg)}
-.ns{--c:var(--ns);--b:var(--ns-bg)}.tt{--c:var(--tt);--b:var(--tt-bg)}.cr{--c:var(--cr);--b:var(--cr-bg)}
+.ns{--c:var(--ns);--b:var(--ns-bg)}.tt{--c:var(--tt);--b:var(--tt-bg)}.cr{--c:var(--cr);--b:var(--cr-bg)}.bt{--c:var(--bt);--b:var(--bt-bg)}
 .chip{display:inline-flex;align-items:center;gap:6px;padding:2px 10px 2px 8px;border-radius:999px;font-weight:500;font-size:.82rem;background:var(--b);color:var(--c);border:1px solid var(--c);white-space:nowrap}
 .chip::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c)}
 .chip i{font-style:normal;opacity:.75}
@@ -137,11 +137,12 @@ const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",
 const norm=s=>String(s).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/đ/g,"d").trim();
 const G={
 kt:["Kế thừa",["Nam Á","Vietic","Việt–Mường"]],
-han:["Vay Hán",["Hán Việt cổ","Hán Việt","Hán Việt Việt hoá","Vay Hán muộn","Vay Hán (chưa rõ tầng)"]],
-vay:["Vay khác",["Tày–Thái","Chăm, Mã Lai, Khmer","Châu Âu và khác","Ngôn ngữ khác"]],
-ns:["Nội sinh",["Từ ghép","Từ láy","Chuyển loại, chuyển nghĩa","Phụ tố cổ"]],
+han:["Vay Hán",["Hán Việt cổ","Hán Việt","Hán Việt Việt hoá","Vay Hán muộn","Vay Hán (chưa rõ tầng)","Nghi là Hán Việt (suy luận)"]],
+vay:["Vay khác",["Tày–Thái","Chăm, Mã Lai, Khmer","Tiếng Pháp","Tiếng Anh","Tiếng Nga","Châu Âu khác","Phạn, Pali, Ấn Độ","Nhật, Triều Tiên","Chưa rõ ngôn ngữ nguồn","Ngôn ngữ khác"]],
+ns:["Nội sinh",["Từ ghép","Từ láy","Viết tắt, rút gọn","Từ lóng, khẩu ngữ","Thành ngữ, tục ngữ","Chuyển loại, chuyển nghĩa","Phụ tố cổ"]],
 tt:["Tượng thanh, tượng hình",["Tượng thanh","Tượng hình"]],
-cr:["Chưa xác định",["Chưa xác định"]]};
+cr:["Chưa xác định",["Một âm tiết","Nhiều âm tiết"]],
+bt:["Biến thể và tham chiếu",["Bỏ dấu kiểu cũ","Sai chính tả","Dạng viết khác","Phương ngữ","Tham chiếu từ khác"]]};
 const CONF=["Chưa xác định","Đang tranh luận","Có khả năng","Chắc chắn"];
 const SEED=[
 {id:"ngua",w:"ngựa",gloss:"động vật họ ngựa",L:[["han","Hán Việt cổ"]],conf:2,doublets:["ma"],note:"Gốc chữ 馬. Ví dụ minh hoạ, cần kiểm chứng thời điểm vay."},
@@ -211,7 +212,7 @@ function showD(){
   d.className="d "+e._g;
   d.innerHTML='<button class="x" data-x="close" aria-label="Đóng">×</button><h2>'+esc(e.w)+(e.user?' <span class="tag">chưa duyệt</span>':"")+(e.todo?' <span class="tag">chờ điền</span>':"")+'</h2>'
    +'<p class="mute" style="margin:4px 0 10px">'+esc(e.gloss)+'</p><div style="display:flex;flex-wrap:wrap;gap:6px">'+e.L.map(l=>'<span class="chip '+l[0]+'">'+G[l[0]][0]+' › '+esc(l[1])+'</span>').join("")+'</div>'
-   +'<dl><dt>Chữ Hán gốc</dt><dd class="hz">'+E(e.han)+'</dd><dt>Dạng viết CJK</dt><dd class="hz">'+E((e.cjk||[]).join("  "))+'</dd><dt>Phát âm</dt><dd>'+E(e.ipa)+'</dd><dt>Độ tin cậy</dt><dd><span class="dots">'+dots(e.conf)+'</span> '+CONF[e.conf]+(e.review?' · cần rà soát':'')+'</dd><dt>Dạng tái lập</dt><dd>'+E(e.recon)+'</dd><dt>Đồng nguyên</dt><dd>'+E(e.cog)+'</dd><dt>Cặp song song</dt><dd>'+(lk(e.doublets)||E(""))+'</dd><dt>Thành tố</dt><dd>'+(lk(e.parts)||E(""))+'</dd><dt>Biến thể</dt><dd>'+E((e.variants||[]).join(", "))+'</dd><dt>Ghi chú</dt><dd>'+E(e.note)+'</dd><dt>Nguồn</dt><dd>'+E(e.src)+'</dd><dt>Quy tắc</dt><dd>'+E(e.rule)+'</dd></dl>'+(e.pending&&e._cid?'<p style="margin-top:16px"><button class="save" data-x="ok" data-c="'+esc(e._cid)+'">Duyệt</button> <button class="ghost" data-x="rm" data-c="'+esc(e._cid)+'">Xoá</button></p>':"");
+   +'<dl><dt>Chữ Hán gốc</dt><dd class="hz">'+E(e.han)+'</dd><dt>Dạng viết CJK</dt><dd class="hz">'+E((e.cjk||[]).join("  "))+'</dd><dt>Phát âm</dt><dd>'+E(e.ipa)+'</dd><dt>Tần suất (OpenSubtitles)</dt><dd>'+(e.freq?nf(e.freq):E(""))+'</dd><dt>Độ tin cậy</dt><dd><span class="dots">'+dots(e.conf)+'</span> '+CONF[e.conf]+(e.review?' · cần rà soát':'')+'</dd><dt>Dạng tái lập</dt><dd>'+E(e.recon)+'</dd><dt>Đồng nguyên</dt><dd>'+E(e.cog)+'</dd><dt>Cặp song song</dt><dd>'+(lk(e.doublets)||E(""))+'</dd><dt>Thành tố</dt><dd>'+(lk(e.parts)||E(""))+'</dd><dt>Biến thể</dt><dd>'+E((e.variants||[]).join(", "))+'</dd><dt>Tham chiếu</dt><dd>'+(e.lemma?(lk([e.lemma])||esc(e.lemma)):E(""))+'</dd><dt>Ghi chú</dt><dd>'+E(e.note)+'</dd><dt>Nguồn</dt><dd>'+E(e.src)+'</dd><dt>Quy tắc</dt><dd>'+E(e.rule)+'</dd></dl>'+(e.pending&&e._cid?'<p style="margin-top:16px"><button class="save" data-x="ok" data-c="'+esc(e._cid)+'">Duyệt</button> <button class="ghost" data-x="rm" data-c="'+esc(e._cid)+'">Xoá</button></p>':"");
 }
 async function exp(t){
   let data,name="tu-nguyen-"+R.length+"."+t;

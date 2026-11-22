@@ -1,201 +1,201 @@
-3517 mục chờ điền nhiều âm tiết mà MỌI âm tiết đều có âm Hán Việt (chưa khớp CC-CEDICT). Mẫu 200:
+287 mục chờ điền nhiều âm tiết mà MỌI âm tiết đều có âm Hán Việt (chưa khớp CC-CEDICT). Mẫu 200:
 a lê
-ba máu sáu cơn
-bi ba bi bô
-biểu sinh
-bài gạo
-bán dạo
-bèo Nhật Bản
-bì khổng
-bò mộng
-búa khoan
-bạch oan
-bảy mươi
-bẻ liễu
+ai hoài
+ai lê
+ai lại
+an toàn dữ liệu
+ba bị
+ba cùng
+ba lông
+biểu thức chính quy
+bác sĩ nhi
+bách bổ
+bán công
+báng bổ
+báng thần
+bãi nại
+bí bách
+bí tỉ
+băng đô
+bạc ác
+bằng hữu chi giao
+bệ kiến
 bố khỉ
-bổ túc tay lái
-bức thiết
-chim báo bão
-chiều tà
-chuối sứ
-châm chế
-chín điểm
-chùm nhum
-chấp kinh
-chống nạnh
-con nghiện
-cà phê cà pháo
+bốc đoán
+bốc đồng
+bồ bồ
+bồ chính
+bồ kết
+bổ bán
+bộ chỉ huy
+bột bán
+bức bí
+chi chiết
+chiêu liêu
+chiêu quân
+chiêu ấn
+chiết áp
+chuẩn không cần chỉnh
+chí ác
+chính khoá
+chấm phá
+chế áp
+cung quăng
+cá diêu hồng
+cá hố
 cá lạc
-cá thia
-có nết
-cúc dục
-cải hoá
-cấu uế
-cắt lượt
-cục mịch
-dao phay
-dung túng
-dê xồm
-dấu triện
-eo óc
-gia hào
-già họng
-giãy nảy
-giấu kín
-giờ hồn
-gái tân
-gả chồng
-gồm ba
-hiên môn
-hoa kim châm
-hoạ nô
-hà y
-hí ha hí hửng
-húng chó
-hương lão
-hạ uy cầm
-hết mức
-hồi dương
-hộ trì
-kham khổ
-khoác lác
-khuôn sáo
-khâm mạng
-khó nghĩ
-không đâu
-khốc quỷ kinh thần
-kinh quyền
-kì giông
-kết hối
+cá măng
+cá nguyệt
+cá ngão
+cá quả
+cáo lỗi
+cô đồng
+công nhật
+công quỹ
+cù kì
+cưỡng hôn
+cả cục
+cấn cái
+cần ích
+cẩn chí
+cẩn tắc
+cốc đán
+cổ cánh
+cổ học
+củ từ
+củ ấu
+cử ai
+dao lưu
+dũ xuất dũ kì
+gia chi dĩ
+già cốc
+giá dụ
+giải vấn
+hai tiên
+hiếu hỉ
+hoang liêu
+huyện hàm
+huấn nghệ
+hàn mặc
+hôn phu
+hôn thê
+hý thuỷ
+hư hàm
+hương cả
+hương mục
+hương ẩm
+hạ liêu
+hạ nang
+hất hàm
+hầu bóng
+hậu tra
+hồ trăn
+hổ trướng
+hộ lại
+hội ngộ chi kỳ
+hỷ tín
+khang cát
+khi không
+khoan hòa
+khoan khoái
+khách man
+khái toán
+khâm kỳ
+không sao
+khố lục
+khởi mông
+khủng hoảng chu kỳ
+kinh tế tri thức
+kiết sử
+kiết xác
+kí chú viên
+kỳ bí
 kỳ cùng
-kỳ trung
-lanh tra lanh tranh
-liếc mắt
-long tóc gáy
-ly thân
-lánh mặt
-lâu năm
-lên mây
-lôi la
-lăn chiêng
-lơ đãng
-lược thuật
-lảng vảng
-lẫy lừng
-lẻ tẻ
-lọc xọc
-lộng lẫy
-lỡ cơ
-ma cỏ
-minh sinh
-muôn thủa
-máu Hoạn thư
-mãng cầu
-mô Phật
-mạ kẽm
-mảy may
+kỳ mưu
+kỳ mục
+kỳ thuỷ
+lan nhai
+linh đan
+liên ba
+liêu điêu
+luân xa
+lâm kỳ
+lãn công
+lăng quăng
+lưu đồ
+lại cái
+lễ chiêu
+lỗ mỗ
+lỗ đáo
+lục lạo
+lục phù
+lục trình
+lực lượng thứ ba
+mai điểu
+mang tai
+mạt pháp
+mạt vận
+mặc cả
 mặc sức
-mỏng tanh
-mời rơi
+mặc tình
+mặc ý
+mệnh giá
+một thể
+một thời
+nam tử tu mi
 nanh ác
-nghĩ thầm
-ngu vãi
-ngói móc
-người Nga
-ngược mắt
-ngỏm củ tỏi
-nhiều chuyện
-nhà quan
-nhãn quan
-nhường bao
-nhật kỳ
-nhị thập tứ hiếu
-nuốt chửng
-nói lên
-nói tới
-năm sau
-nắng oi
-nề hà
-oái oăm
-phong kế
-phát nguyên
-phó giáp
-phúc thần
-phải gái
-phổ niệm
-phục mệnh
-quan thuế
-qui thuận
-quái xế
-quên mình
-quả văng
-quốc tử giám
-riêng tây
-rơi lệ
-rỏ giọt
-sa giông
-sinh hàn
-soi xét
-sá sùng
-sã cánh
-sơ kết
-sắp hàng
-sớm tối
-sự trừng trị
-tham bác
-thiêm sự
-thu hình
-thuộc về
-tháng tư
-thèm vào
-thông lượng
-thăng long
-thường kỳ
-thất gia
-thắt buộc
-thọ trì
-thủ hộ
-thực dưỡng
-tiên đế
-tiền căn
-tiện thiếp
-trai lí
-truy dụng
-tráo mắt
-trông vời
-trạc thải
-trắc nết
-trọng đãi
-trợ tá
-tuyền bồng
-tà pháp
-tàu suốt
-tát tai
-tân tổng thống
-tính đố
-tông huấn
-túc học
-tư trợ
-tạp thuế
-tầm vung
-tằng hắng
-tốc chiến
-tồn cổ
-tụng kỳ
-tử tức
-ung ủng
-việt khẩu
-vòng vây
-vương vương
-vọng ngôn
-xe du lịch
-xung huyết
-xã thơ
-xảo biện
-y sì
-áo quan
-ít có
-ông đồ
-điêu đứng
-đàn đúm
-đê nhục
+nghênh hôn
+ngôn hành lục
+ngải đắng
+ngọc lục bảo
+ngục tối
+nha đam
+nhị hỉ
+nữ sức
+phong dao
+phá bản
+phá kiêu
+phát sáng
+phân đồ
+phạm đồ
+phỉ sức
+phụ công
+phục dựng
+phụng vụ
+quy hoạch đô thị
+quán chỉ
+sang số
+sang đoạt
+sang độc
+sao đẩu
+siêu thức
+song tiện
+sung sức
+sàng đông
+sào ngư
+sá bao
+sá chi
+sá quản
+sáng lạng
+sáo sậu
+sân lai
+sân si
+sóc cảnh
+súng ống
+sơn tràng
+số một
+tai ác
+tam bành
+tam giác tù
+tam hợp
+tao nhân
+tao đàn
+thai dựng
+thiếu da
+thuật lại
+thân cô thế cô
+thính tai
+thôi tra
+thông diễn
+thông liên thất
+thông lân

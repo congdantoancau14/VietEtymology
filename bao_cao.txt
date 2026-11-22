@@ -1,153 +1,153 @@
-Tổng số mục: 23217
-Số dòng đọc được theo định dạng: {'tiếng Việt': 38068, 'tiếng Anh': 29880}
-Bỏ qua: {'tên riêng': 866, 'biến thể (gập vào từ gốc)': 1726, 'mục chữ Hán/Nôm': 6085}
+Tổng số mục: 25931
+Số dòng đọc được theo định dạng: {'tiếng Việt': 38803, 'tiếng Anh': 31771}
+Bỏ qua: {'tên riêng': 1203, 'biến thể (thành mục riêng, có liên kết)': 1875, 'mục chữ Hán/Nôm': 6127}
 
 
-Theo quy tắc: R0=9146, R3=1546, R1a=2134, R3d=218, R2b=375, R4b=1971, R5=1901, R1a+U=2667, R1b=754, R1g=6, R2a=280, R4c=802, R1f=619, R4a=104, R2d=152, R2c=141, R4e=38, R1e=39, R1c=1, R2f=169, R2e=68, R4d=77, R5b=9
-Cần người rà: 2926
-Chờ điền: 9146
-Trong số chờ điền: 5003 mục nhiều âm tiết (giữ nguyên vì không bẻ được), 4143 mục một âm tiết.
+Theo quy tắc: R0=5506, R6=1590, R3=1568, R4f=63, R1a=970, R1a+U=3798, R5c=782, R3d=225, R4c=1434, R6r=1451, R3f=279, R4g=126, R2b=370, R4b=1965, R5=1826, R6o=39, R1b=746, R1g=4, R2a=279, R1h=24, R1f=806, R1i=1104, R1k=168, R4a=104, R2g=3, R2d=151, R2c=141, R4e=36, R1e=38, R1c=1, R2f=169, R2e=68, R4d=75, T1=13, R5b=9
+Cần người rà: 5241
+Chờ điền: 5506
+Trong số chờ điền: 2053 mục nhiều âm tiết (giữ nguyên vì không bẻ được), 3453 mục một âm tiết.
 
 Danh mục hay gặp trong Wiktionary tiếng Việt (để bổ sung quy tắc):
-  38013  Mục từ tiếng Việt
-  31562  Mục từ dùng cấu trúc mục từ Wiktionary cũ
-  29314  Mục từ có cách phát âm IPA tiếng Việt
+  38748  Mục từ tiếng Việt
+  32121  Mục từ dùng cấu trúc mục từ Wiktionary cũ
+  29952  Mục từ có cách phát âm IPA tiếng Việt
   14291  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Danh từ
-  14248  Danh từ tiếng Việt
-  10607  Trang có đề mục ngôn ngữ
-   8972  Động từ tiếng Việt
-   7755  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Động từ
-   6507  Tính từ tiếng Việt
-   6414  Trang có 1 đề mục ngôn ngữ
-   6267  Mục từ Hán-Việt
-   6139  Mục từ tiếng Việt có chữ Nôm
-   5614  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Tính từ
-   4668  Mục từ chưa xếp theo loại từ
-   3999  Trang có 0 đề mục ngôn ngữ
-   3357  Mục từ Hán-Việt có từ nguyên Hán chưa được tạo bài
+  14224  Danh từ tiếng Việt
+  10829  Trang có đề mục ngôn ngữ
+   8987  Động từ tiếng Việt
+   7779  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Động từ
+   6589  Trang có 1 đề mục ngôn ngữ
+   6512  Tính từ tiếng Việt
+   6280  Mục từ Hán-Việt
+   6141  Mục từ tiếng Việt có chữ Nôm
+   5628  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Tính từ
+   4669  Mục từ chưa xếp theo loại từ
+   4045  Trang có 0 đề mục ngôn ngữ
+   3368  Mục từ Hán-Việt có từ nguyên Hán chưa được tạo bài
    1822  Từ láy tiếng Việt
-   1771  Mục từ có hộp bản dịch
-   1573  Từ ghép tiếng Việt
-   1117  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Phó từ
-   1116  Phó từ tiếng Việt
-    981  Mục từ có bản dịch tiếng Anh
+   1780  Mục từ có hộp bản dịch
+   1564  Từ ghép tiếng Việt
+   1118  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Phó từ
+   1117  Phó từ tiếng Việt
+    982  Mục từ có bản dịch tiếng Anh
     827  Bảng dịch không chú thích ngữ nghĩa
-    332  Từ dẫn xuất từ tiếng Trung Quốc tiếng Việt
-    323  Mục từ có bản dịch tiếng Nhật
+    338  Từ dẫn xuất từ tiếng Trung Quốc tiếng Việt
+    325  Mục từ có bản dịch tiếng Nhật
     320  Mục từ có bản dịch tiếng Pháp
-    295  Mục từ có bản dịch tiếng Quan Thoại
-    228  Mục từ có bản dịch tiếng Nga
+    299  Mục từ có bản dịch tiếng Quan Thoại
+    294  Tục ngữ tiếng Việt
+    293  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Tục ngữ
+    241  Thành ngữ tiếng Việt
+    234  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Thành ngữ
+    226  Mục từ có bản dịch tiếng Nga
     210  Mục từ có bản dịch tiếng Tây Ban Nha
     207  Mục từ có bản dịch tiếng Đức
-    200  Mục từ có bản dịch tiếng Hà Lan
+    198  Mục từ có bản dịch tiếng Hà Lan
     198  Từ dẫn xuất từ tiếng Việt-Mường nguyên thủy tiếng Việt
     198  Từ kế thừa từ tiếng Việt-Mường nguyên thủy tiếng Việt
-    173  Mục từ có bản dịch tiếng Phần Lan
-    172  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Thán từ
+    171  Mục từ có bản dịch tiếng Phần Lan
+    171  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Thán từ
     151  Thán từ tiếng Việt
     147  Mục từ có liên kết âm thanh tiếng Việt
-    143  Mục từ có bản dịch tiếng Triều Tiên
-    141  Mục từ có bản dịch tiếng Bồ Đào Nha
-    138  Mục từ có bản dịch tiếng Hungary
-    135  Mục từ có bản dịch tiếng Ba Lan
-    131  Mục từ có bản dịch tiếng Ý
+    146  Thành ngữ Hán-Việt
+    144  Mục từ có bản dịch tiếng Triều Tiên
+    140  Mục từ có bản dịch tiếng Bồ Đào Nha
+    137  Mục từ có bản dịch tiếng Hungary
+    134  Mục từ có bản dịch tiếng Ba Lan
+    129  Mục từ có bản dịch tiếng Ý
     127  Toán học
-    123  Mục từ có bản dịch tiếng Catalan
-    120  Mục từ có bản dịch tiếng Thụy Điển
+    122  Mục từ có bản dịch tiếng Catalan
     120  Từ dẫn xuất từ tiếng Pháp tiếng Việt
     119  Mục từ có bản dịch tiếng Thái
-    118  Danh từ có loại từ con tiếng Việt
+    118  Mục từ có bản dịch tiếng Thụy Điển
     117  Điệp thức tiếng Việt
+    116  Danh từ có loại từ con tiếng Việt
     115  Từ vay mượn từ tiếng Pháp tiếng Việt
-    114  Mục từ có bản dịch tiếng Ả Rập
+    112  Mục từ có bản dịch tiếng Ả Rập
     103  Vật lý học
     103  Mục từ có bản dịch tiếng Gruzia
     103  Mục từ có bản dịch tiếng Đan Mạch
     101  Trang có 2 đề mục ngôn ngữ
     100  Đại từ tiếng Việt
-     96  Mục từ có bản dịch tiếng Quảng Đông
-     95  Mục từ có bản dịch tiếng Hy Lạp
+     97  Mục từ có bản dịch tiếng Quảng Đông
      94  Mục từ có bản dịch tiếng Armenia
      94  Mục từ có bản dịch tiếng Miến Điện
-     91  Mục từ có bản dịch tiếng Estonia
+     94  Mục từ có bản dịch tiếng Hy Lạp
      90  Mục từ có bản dịch tiếng Bulgari
      90  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Đại từ
-     90  Mục từ có bản dịch tiếng Séc
-     88  Mục từ có bản dịch tiếng Thổ Nhĩ Kỳ
-     86  Mục từ có bản dịch tiếng Khmer
+     89  Mục từ có bản dịch tiếng Estonia
+     89  Mục từ có bản dịch tiếng Séc
+     86  Mục từ có bản dịch tiếng Thổ Nhĩ Kỳ
+     85  Mục từ có bản dịch tiếng Khmer
      84  Mục từ có bản dịch tiếng Quốc tế ngữ
      82  Mục từ có bản dịch tiếng Ukraina
      80  Mục từ có bản dịch tiếng Ba Tư
      79  Mục từ có bản dịch tiếng Litva
-     78  Mục từ có bản dịch tiếng Hindi
+     77  Mục từ có bản dịch tiếng Hindi
      77  Mục từ có bản dịch tiếng Lào
      75  Mục từ có bản dịch tiếng Rumani
      75  Mục từ có bản dịch tiếng Latvia
      73  Mục từ có bản dịch tiếng Iceland
-     73  Danh từ có loại từ cái tiếng Việt
-     72  vi:Trái cây
-     71  Mục từ có bản dịch tiếng Indonesia
-     70  Mục từ có bản dịch tiếng Mã Lai
-     69  Mục từ dùng cấu trúc mục từ Wiktionary cũ/Liên từ
 
 Mẫu từ nguyên hay gặp trong Wiktionary tiếng Anh, kèm mã ngôn ngữ (để bổ sung quy tắc):
-  12276  vi-etym-sino
-  11194  categorize
-  10797  etymid
-   6212  com
-   2604  yesno
-   1303  der zh
-    959  inh mkh-vie-pro
-    620  af
-    593  ncog
-    548  IPAfont
-    540  bor fr
-    539  doublet
-    537  compound
-    509  ltc-l
-    487  cog mtq
-    467  glossary
-    446  vi-etym-redup
+  12413  vi-etym-sino
+  11316  categorize
+  10901  etymid
+   6214  com
+   2657  yesno
+   1323  der zh
+    962  inh mkh-vie-pro
+    618  af
+    607  ncog
+    569  IPAfont
+    556  compound
+    544  doublet
+    538  bor fr
+    511  ltc-l
+    488  cog mtq
+    469  glossary
+    449  vi-etym-redup
     338  cog km
-    254  cal zh
-    252  com+
-    243  vi-l
+    276  cal zh
+    254  com+
+    251  vi-l
     237  bor ja
     215  inh aav-pro
-    213  och-l
+    214  och-l
     196  inh mkh-pro
     189  cog pac
     184  cog zh
     175  cog th
+    166  l/vi/Latn
     163  cog mnw
-    159  l/vi/Latn
     158  cog scb
-    153  bor+ fr
-    153  zh-l
+    155  bor+ fr
+    154  zh-l
     153  inh+ mkh-vie-pro
-    151  cog tou
+    152  cog tou
     139  cog bdq
     136  cog aem
-    125  blend
-    114  cog ja
-    108  bor en
+    124  blend
+    117  cog ja
+    109  bor en
+    106  m-g
+    106  lit
+    105  vi-link
     104  rdp
-     98  q
-     98  cal en
-     97  vi-link
-     94  der och
+     96  q
+     96  cal en
+     95  der och
      87  cog mkh-kat-pro
-     86  m-g
-     86  lit
-     84  l/vi/Hani
+     85  l/vi/Hani
      79  cog kha
-     75  der la-new
-     74  clipping
+     79  calque zh
+     76  der la-new
      73  cog kjg
-     71  vchem
-     68  calque zh
+     73  vchem
+     73  clipping
      66  cog thm
      66  der ltc
-     59  cog vi
+     61  cog vi
+     59  bor zh
      58  wp
-     57  inh mkh-mvi

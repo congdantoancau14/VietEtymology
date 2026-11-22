@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chú giải nguồn gốc từ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#faf9f7;--surface:#fff;--ink:#1d1d1f;--mute:#5c5c63;--line:#e4e2dd;
+  --kt:#1f7a5c;--kt-bg:#e1f1ea;
+  --han:#b3402f;--han-bg:#f8e5e1;
+  --vay:#9a6608;--vay-bg:#f6ebd0;
+  --ns:#2f5fa8;--ns-bg:#e1e9f6;
+  --tt:#7a4a9e;--tt-bg:#ede3f5;
+  --cr:#62626a;--cr-bg:#e9e9ec;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#141416;--surface:#1d1d20;--ink:#ececee;--mute:#a2a2aa;--line:#2f2f35;
+    --kt:#5fd0a6;--kt-bg:#16352b;--han:#f08a78;--han-bg:#3b1f1a;
+    --vay:#e5b457;--vay-bg:#38290e;--ns:#7fa9ec;--ns-bg:#192a47;
+    --tt:#c39be6;--tt-bg:#2e2040;--cr:#b0b0b8;--cr-bg:#2a2a2f;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#141416;--surface:#1d1d20;--ink:#ececee;--mute:#a2a2aa;--line:#2f2f35;
+  --kt:#5fd0a6;--kt-bg:#16352b;--han:#f08a78;--han-bg:#3b1f1a;
+  --vay:#e5b457;--vay-bg:#38290e;--ns:#7fa9ec;--ns-bg:#192a47;
+  --tt:#c39be6;--tt-bg:#2e2040;--cr:#b0b0b8;--cr-bg:#2a2a2f;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.65 "Be Vietnam Pro",system-ui,"Segoe UI",sans-serif}
+main{max-width:860px;margin:0 auto;padding:40px 20px 72px}
+h1,h2,h3{font-family:Newsreader,Georgia,"Times New Roman",serif;font-weight:600;line-height:1.2;margin:0}
+h1{font-size:clamp(2rem,5vw,2.8rem);letter-spacing:-.01em}
+h2{font-size:1.6rem}
+h3{font-size:1.15rem}
+p{margin:.5em 0}
+.lead{color:var(--mute);max-width:62ch;margin-top:12px}
+.warn{margin-top:18px;padding:12px 14px;border-left:3px solid var(--vay);background:var(--vay-bg);border-radius:0 8px 8px 0;font-size:.92rem;max-width:68ch}
+section{margin-top:56px}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:4px 12px 4px 10px;border-radius:999px;font:500 .88rem/1.4 inherit;background:var(--b);color:var(--c);border:1px solid var(--c);cursor:default;text-decoration:none}
+.chip::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--c)}
+button.chip{cursor:pointer;font-family:inherit}
+button.chip:hover{filter:brightness(.96)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.kt{--c:var(--kt);--b:var(--kt-bg)}.han{--c:var(--han);--b:var(--han-bg)}
+.vay{--c:var(--vay);--b:var(--vay-bg)}.ns{--c:var(--ns);--b:var(--ns-bg)}
+.tt{--c:var(--tt);--b:var(--tt-bg)}.cr{--c:var(--cr);--b:var(--cr-bg)}
+#legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.parent{margin-top:28px;border:1px solid var(--line);border-top:5px solid var(--c);border-radius:10px;background:var(--surface);padding:20px 22px}
+.parent>p{color:var(--mute);margin-top:6px}
+.subs{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:12px}
+.subs li{padding-left:14px;border-left:3px solid var(--b)}
+.subs strong{color:var(--c);font-weight:600}
+.subs span{display:block;color:var(--mute);font-size:.94rem}
+.tbl{width:100%;border-collapse:collapse;margin-top:14px;font-size:.95rem}
+.tbl th,.tbl td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl th{font-weight:600;white-space:nowrap}
+.scroll{overflow-x:auto}
+.dots{letter-spacing:3px;color:var(--ink);white-space:nowrap}
+.pure{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.entry{margin-top:16px;border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:18px 20px}
+.entry header{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 14px}
+.entry dl{margin:14px 0 0;display:grid;grid-template-columns:max-content 1fr;gap:6px 16px;font-size:.94rem}
+.entry dt{color:var(--mute)}.entry dd{margin:0}
+.empty{color:var(--mute);font-style:italic}
+code{font:inherit;font-weight:600}
+</style>
+</head>
+<body>
+<main>
+<h1>Chú giải nguồn gốc từ</h1>
+<p class="lead">Mỗi mục từ trong từ điển mang một nhãn màu cho biết từ ấy đến từ đâu. Màu chỉ nhóm lớn nhất; tên nhãn cụ thể nằm trong nhóm đó. Chọn một nhóm để xem các nhãn con.</p>
+<p class="warn">Từ nguyên học làm việc với giả thuyết có chứng cứ, không phải sự thật tuyệt đối. Vì vậy mỗi mục từ còn ghi mức độ tin cậy và nguồn trích dẫn, và những chỗ còn tranh luận được ghi nhiều giả thuyết song song.</p>
+<div id="legend" role="list" aria-label="Các nhóm nguồn gốc"></div>
+
+<section id="groups"><h2>Các nhóm và nhãn</h2><div id="parents"></div></section>
+
+<section>
+<h2>“Thuần Việt” nằm ở đâu?</h2>
+<p>“Thuần Việt” là khái niệm dân gian, không phải thuật ngữ khoa học. Trong thực tế nó thường chỉ có nghĩa “không phải Hán Việt”, nên gom nhiều thứ rất khác nhau về nguồn gốc. Từ điển này không dùng nó làm nhãn, mà chỉ ghi chú khi một từ thường được cảm nhận là thuần Việt. Các nhãn thường được xếp vào cảm nhận đó:</p>
+<div class="pure" id="pure"></div>
+<p style="color:var(--mute);font-size:.94rem">Hán Việt cổ có mặt ở đây vì đã Việt hoá sâu, dù gốc vẫn là vay. Nhãn nội sinh chỉ tính khi từ được tạo từ chất liệu bản địa.</p>
+</section>
+
+<section>
+<h2>Mức độ tin cậy</h2>
+<div class="scroll"><table class="tbl">
+<tr><th>Chắc chắn</th><td><span class="dots" aria-hidden="true">●●●●</span></td><td>Có đối ứng ngữ âm đều đặn, được nhiều ngôn ngữ hoặc nhiều tác giả xác nhận.</td></tr>
+<tr><th>Có khả năng</th><td><span class="dots" aria-hidden="true">●●●○</span></td><td>Hợp lý về âm và nghĩa, chứng cứ còn ít.</td></tr>
+<tr><th>Đang tranh luận</th><td><span class="dots" aria-hidden="true">●●○○</span></td><td>Có nhiều giả thuyết cạnh tranh; mục từ liệt kê từng giả thuyết và tác giả.</td></tr>
+<tr><th>Chưa xác định</th><td><span class="dots" aria-hidden="true">●○○○</span></td><td>Chưa có giả thuyết đáng tin.</td></tr>
+</table></div>
+</section>
+
+<section>
+<h2>Ký hiệu</h2>
+<div class="scroll"><table class="tbl">
+<tr><th><code>*abc</code></th><td>Dạng tái lập, không có trong tài liệu ghi chép</td></tr>
+<tr><th><code>&lt;</code></th><td>Bắt nguồn từ</td></tr>
+<tr><th><code>&gt;</code></th><td>Trở thành</td></tr>
+<tr><th><code>~</code></th><td>Đồng nguyên với</td></tr>
+<tr><th><code>?</code></th><td>Không chắc chắn</td></tr>
+<tr><th><code>cf.</code></th><td>So sánh với</td></tr>
+</table></div>
+</section>
+
+<section>
+<h2>Một mục từ trông như thế nào</h2>
+<p style="color:var(--mute);font-size:.94rem">Ví dụ minh hoạ bố cục. Nội dung chưa được kiểm chứng, các ô chưa có dữ liệu để trống.</p>
+<article class="entry">
+<header><h3>ngựa</h3><span class="chip han">Hán Việt cổ</span><span class="dots" aria-label="Mức tin cậy: có khả năng">●●●○</span></header>
+<dl>
+<dt>Cặp song song</dt><dd>ngựa ~ mã (馬, Hán Việt)</dd>
+<dt>Dạng tái lập</dt><dd class="empty">chưa điền</dd>
+<dt>Đồng nguyên</dt><dd class="empty">chưa điền</dd>
+<dt>Phái sinh</dt><dd class="empty">chưa điền</dd>
+<dt>Nguồn</dt><dd class="empty">chưa điền</dd>
+</dl>
+</article>
+</section>
+</main>
+<script>
+const P=[
+{id:"kt",name:"Kế thừa",d:"Từ đã có sẵn trong ngôn ngữ tổ tiên và truyền xuống qua các thế hệ.",s:[
+["Nam Á","Có đồng nguyên với các ngành Nam Á ngoài Vietic (Khmer, Mon, Ba Na...). Truy được xa nhất."],
+["Vietic","Chỉ thấy trong nhóm Vietic (Việt, Mường, Chứt...), chưa có đối ứng chắc chắn ngoài nhóm. Có thể vẫn là gốc Nam Á đã mất dấu ở nơi khác."],
+["Việt–Mường","Chỉ thấy ở tiếng Việt và tiếng Mường: cách tân sau khi nhánh này tách khỏi các nhánh Vietic khác."]]},
+{id:"han",name:"Vay Hán",d:"Từ vay từ các thứ tiếng Hán qua nhiều thế kỷ. Ranh giới giữa các tầng còn tranh luận.",s:[
+["Hán Việt cổ","Vay qua tiếp xúc trực tiếp, trước khi cách đọc chữ Hán được chuẩn hoá. Đã Việt hoá sâu (ví dụ ngựa so với mã)."],
+["Hán Việt","Hệ thống cách đọc chữ Hán chuẩn hoá, theo nhiều nghiên cứu hình thành vào khoảng thời Đường. Lớp từ quen thuộc như quốc gia, học sinh."],
+["Hán Việt Việt hoá","Gốc Hán Việt nhưng đã biến âm trong khẩu ngữ."],
+["Vay Hán muộn","Vào sau khi Hán Việt hình thành: Quảng Đông, Triều Châu, Phúc Kiến, Quan thoại..."],
+["Vay Hán (chưa rõ tầng)","Nguồn ghi là gốc Hán nhưng chưa phân định được tầng."]]},
+{id:"vay",name:"Vay khác và tiếp xúc",d:"Từ có liên hệ với ngôn ngữ khác ngoài Hán. Mỗi mục ghi ngôn ngữ nguồn và, khi biết, thời kỳ vay. Phân loại theo ngôn ngữ nguồn, không theo châu lục.",s:[
+["Tày–Thái","Từ giống nhau do ở kề nhau nhiều thế kỷ. Bắt buộc ghi hướng vay (Việt sang Thái hay ngược lại), vì nhiều từ còn tranh luận."],
+["Chăm, Mã Lai, Khmer","Từ vay từ các ngôn ngữ phương Nam và Đông Nam Á."],
+["Tiếng Pháp","Từ vay từ tiếng Pháp."],
+["Tiếng Anh","Từ vay từ tiếng Anh, kể cả Anh Mỹ."],
+["Tiếng Nga","Từ vay từ tiếng Nga."],
+["Châu Âu khác","Đức, Latinh, Hy Lạp, Tây Ban Nha, Ý..."],
+["Phạn, Pali, Ấn Độ","Từ gốc Ấn Độ, kể cả từ phạn qua chữ Hán (như ba-la-mật-đa, mang thêm nhãn Hán Việt)."],
+["Nhật, Triều Tiên","Từ vay từ tiếng Nhật, tiếng Triều Tiên."],
+["Chưa rõ ngôn ngữ nguồn","Nhiều khả năng là từ vay (ví dụ viết có gạch nối kiểu phiên âm) nhưng chưa biết ngôn ngữ gốc."],
+["Ngôn ngữ khác","Ả Rập, Ba Tư, Thổ Nhĩ Kỳ, Mông Cổ..."]]},
+{id:"ns",name:"Nội sinh",d:"Từ do người Việt tạo ra từ chất liệu có sẵn. Mục từ chỉ rõ từ được tạo từ thành tố nào.",s:[
+["Từ ghép","Ghép hai hay nhiều thành tố có nghĩa."],
+["Từ láy","Lặp âm một phần hoặc toàn phần."],
+["Chuyển loại, chuyển nghĩa","Từ cũ dùng với từ loại hoặc nghĩa mới."],
+["Phụ tố cổ","Dấu vết tiền tố, trung tố của tiếng Việt cổ. Còn là đề tài nghiên cứu mở."]]},
+{id:"tt",name:"Tượng thanh, tượng hình",d:"Từ mô phỏng âm thanh hoặc hình dáng, thường không truy được theo đối ứng ngữ âm thông thường nên tách riêng.",s:[
+["Tượng thanh","Mô phỏng âm thanh."],["Tượng hình","Mô phỏng hình dáng, trạng thái."]]},
+{id:"cr",name:"Chưa xác định",d:"Chưa tìm thấy đồng nguyên hay nguồn vay nào.",s:[
+["Chưa xác định","Đây là tình trạng của kiến thức, không phải của từ. Một từ không có họ hàng được biết vẫn có thể là từ kế thừa mà các đồng nguyên đã mất hoặc chưa được ghi chép. Chỉ khi có chứng cứ về một sự tạo từ cụ thể mới xếp sang Nội sinh."]]}
+];
+const lg=document.getElementById("legend"),pr=document.getElementById("parents");
+P.forEach(g=>{
+  const b=document.createElement("button");b.type="button";b.className="chip "+g.id;b.textContent=g.name;b.setAttribute("role","listitem");
+  b.onclick=()=>document.getElementById("g-"+g.id).scrollIntoView({block:"start"});
+  lg.appendChild(b);
+  const a=document.createElement("article");a.id="g-"+g.id;a.className="parent "+g.id;
+  a.innerHTML="<h3>"+g.name+"</h3><p>"+g.d+"</p><ul class=\"subs\">"+g.s.map(x=>"<li><strong>"+x[0]+"</strong><span>"+x[1]+"</span></li>").join("")+"</ul>";
+  pr.appendChild(a);
+});
+const pure=[["kt","Nam Á"],["kt","Vietic"],["kt","Việt–Mường"],["han","Hán Việt cổ"],["han","Hán Việt Việt hoá"],["ns","Nội sinh bản địa"]];
+document.getElementById("pure").innerHTML=pure.map(x=>"<span class=\"chip "+x[0]+"\">"+x[1]+"</span>").join("");
+</script>
+</body>
+</html>
