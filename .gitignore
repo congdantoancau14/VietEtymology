@@ -1,4 +1,8 @@
 vi-extract.jsonl
 kaikki.org-dictionary-Vietnamese.jsonl
+thanhngu-dau-muc.txt
 *.pdf
 *.epub
+
+# Giữ lại file cụ thể (tính từ thư mục chứa file .gitignore này)
+!vietnamese-etymology.pdf
