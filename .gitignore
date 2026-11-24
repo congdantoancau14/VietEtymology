@@ -6,3 +6,4 @@ thanhngu-dau-muc.txt
 
 # Giữ lại file cụ thể (tính từ thư mục chứa file .gitignore này)
 !vietnamese-etymology.pdf
+!Từ_Hán-Việt.pdf
