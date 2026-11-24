@@ -1,19 +1,21 @@
 #!/usr/bin/env python3
 """
-phan_loai.py - gán nhãn nguồn gốc tự động từ dump Wiktionary (định dạng JSONL, kiểu kaikki.org).
+phan_loai.py - gán nhãn nguồn gốc từ tiếng Việt từ Wiktionary và các nguồn bổ trợ; xuất entries.json cho trang tra từ.
 
-Chạy:  python phan_loai.py tep1.jsonl [tep2.jsonl ...] [Unihan_Readings.txt]
-Ra:    entries.json (nạp vào trang tra từ), bao_cao.txt (thống kê, danh mục hay gặp, mục cần rà)
+CÁCH DÙNG (khuyến nghị): đặt dữ liệu vào <gốc>/data/ (chạy sap_xep.py để tự xếp), rồi chỉ cần:
+    python scripts/phan_loai.py
+Script tự đọc mọi nguồn trong data/ (nhận diện theo tên tệp) và ghi kết quả vào <gốc>/output/.
+Tuỳ chọn:  --goc <thư mục gốc>   --out <thư mục đầu ra>
+Kiểu cũ vẫn dùng được:  python phan_loai.py tep1.jsonl tep2.jsonl Unihan_Readings.txt ...
 
-Tự nhận dạng từng dòng:
-  - Wiktionary TIẾNG ANH (có etymology_templates): đầy đủ nhất, cho Vietic, Nam Á, từ vay, Hán Việt.
-  - Wiktionary TIẾNG VIỆT (có etymology_texts + categories): cho Hán Việt, từ vay, từ ghép, từ láy.
-Đưa cả hai tệp vào một lần chạy thì kết quả được gộp, nguồn nào có bằng chứng mạnh hơn thì thắng,
-hai nguồn bất đồng thì gắn cờ cần rà. Chỉ dùng thư viện chuẩn. Dữ liệu Wiktionary: CC BY-SA.
-Máy chỉ chuyển lại điều nguồn đã khẳng định, không tự suy đoán. Mức tin cậy tự động tối đa là 2
-("Có khả năng"); 3 ("Chắc chắn") chỉ khi Wiktionary và Unihan kVietnamese cùng khớp (từ Hán Việt).
+Nguồn nhận diện theo tên tệp (không phân biệt hoa thường): *.jsonl = Wiktionary (kaikki.org hoặc vi-extract);
+Unihan*, cedict*, phienam*, chinese-hanviet*, kTraditionalVariant*, opensubs*, Sidwell*, thanhngu* (danh sách đầu mục thành ngữ).
+Máy chỉ chuyển lại điều nguồn đã khẳng định; mức tin cậy tự động tối đa là 2, riêng "Chắc chắn" (3) cần hai nguồn khớp.
+Dữ liệu Wiktionary: CC BY-SA, phải ghi nguồn.
 """
-import collections, itertools, json, os, re, sys, unicodedata
+import collections, itertools, json, os, re, shutil, sys, unicodedata
+
+OUTDIR = "."   # thư mục ghi kết quả; chế độ tự động đặt thành <gốc>/output
 
 AA = {"km", "mnw", "kjg", "bdq", "cmo", "kdt", "sat", "pac", "kha", "bru", "sti", "ktv", "hre"}   # mã ngôn ngữ Nam Á (bản tiếng Anh); mở rộng nếu cần
 AA_PREFIX = ("aav-", "mkh-pro")
@@ -668,7 +670,8 @@ def main(paths, unihan=None, cedict=None, phienam=None, tsv=None, tvar=None, fre
     for d in out:
         d["doublets"] = [first[x] for x in d["doublets"] if x in first]
         d["parts"] = [first[x] for x in d["parts"] if x in first]
-    json.dump(out, open("entries.json", "w", encoding="utf8"), ensure_ascii=False)
+    os.makedirs(OUTDIR, exist_ok=True)
+    json.dump(out, open(os.path.join(OUTDIR, "entries.json"), "w", encoding="utf8"), ensure_ascii=False)
 
     c = collections.Counter(d["L"][0][1] for d in out)
     todo = sum(1 for d in out if d.get("todo"))
@@ -687,28 +690,86 @@ def main(paths, unihan=None, cedict=None, phienam=None, tsv=None, tvar=None, fre
         rep += ["", "Danh mục hay gặp trong Wiktionary tiếng Việt (để bổ sung quy tắc):"] + [f"{n:>7}  {k}" for k, n in cats.most_common(80)]
     if tmpl:
         rep += ["", "Mẫu từ nguyên hay gặp trong Wiktionary tiếng Anh, kèm mã ngôn ngữ (để bổ sung quy tắc):"] + [f"{n:>7}  {k}" for k, n in tmpl.most_common(60)]
-    open("bao_cao.txt", "w", encoding="utf8").write("\n".join(rep))
+    open(os.path.join(OUTDIR, "bao_cao.txt"), "w", encoding="utf8").write("\n".join(rep))
     cand = [w for w, _ in todo_pk if " " in w and all_hv(w)]
-    with open("ung_vien_han_viet.txt", "w", encoding="utf8") as f:
+    with open(os.path.join(OUTDIR, "ung_vien_han_viet.txt"), "w", encoding="utf8") as f:
         f.write(f"{len(cand)} mục chờ điền nhiều âm tiết mà MỌI âm tiết đều có âm Hán Việt (chưa khớp CC-CEDICT). Mẫu 200:\n")
         for w in sorted(cand)[:: max(1, len(cand) // 200)][:200]: f.write(w + "\n")
     import random; random.seed(1)
-    with open("mau_chua_xac_dinh.txt", "w", encoding="utf8") as f:
+    with open(os.path.join(OUTDIR, "mau_chua_xac_dinh.txt"), "w", encoding="utf8") as f:
         for w, pp in random.sample(todo_pk, min(150, len(todo_pk))): f.write(w + " | " + (" | ".join(pp) if pp else "") + "\n")
     print("\n".join(rep[:30]))
 
 
+KEYS = {"unihan": "unihan", "cedict": "cedict", "phienam": "phienam", "chinese-hanviet": "tsv", "ktraditionalvariant": "tvar",
+        "opensubs": "freq", "sidwell": "sidwell", "thanhngu": "idioms"}
+SKIP_DIRS = {"tham_khao", "output", "scripts", "web", "khac", ".git", "__pycache__"}
+
+
+def discover(data_dir):
+    """Đi qua data/ (kể cả thư mục con), nhận diện nguồn theo tên tệp. Mọi .jsonl là Wiktionary."""
+    files, extra = [], {}
+    for dp, dn, fn in os.walk(data_dir):
+        dn[:] = sorted(d for d in dn if d.lower() not in SKIP_DIRS)
+        for f in sorted(fn):
+            low, path = f.lower(), os.path.join(dp, f)
+            k = next((v for pre, v in KEYS.items() if low.startswith(pre)), None)
+            if k and not low.endswith((".pdf", ".epub")):
+                if k in extra: print(f"  Bỏ qua bản trùng: {path} (đã dùng {extra[k]})")
+                else: extra[k] = path
+            elif low.endswith(".jsonl"): files.append(path)
+    return files, extra
+
+
+def auto_idioms(root, extra):
+    """Chưa có danh sách đầu mục thành ngữ mà có PDF từ điển thành ngữ -> tự trích bằng trich_thanh_ngu.py (cần pdftotext)."""
+    if "idioms" in extra or not shutil.which("pdftotext"): return
+    d = os.path.join(root, "data", "raw", "thanh_ngu")
+    pdfs = [os.path.join(d, f) for f in sorted(os.listdir(d)) if f.lower().endswith(".pdf")] if os.path.isdir(d) else []
+    pdfs = [x for x in pdfs if re.search(r"thanh.?ngu", os.path.basename(x).lower())]
+    if not pdfs: return
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import trich_thanh_ngu
+    out = os.path.join(root, "data", "derived", "thanhngu-dau-muc.txt")
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    print("  Chưa có danh sách thành ngữ; đang trích từ", pdfs[0], "(chỉ làm một lần)...")
+    trich_thanh_ngu.main(pdfs[0], out=out)
+    extra["idioms"] = out
+
+
+def cli():
+    global OUTDIR
+    a, root, out, files = sys.argv[1:], None, None, []
+    i = 0
+    while i < len(a):
+        if a[i] in ("-h", "--help"): sys.exit(__doc__)
+        elif a[i] == "--goc": root = a[i + 1]; i += 1
+        elif a[i] == "--out": out = a[i + 1]; i += 1
+        else: files.append(a[i])
+        i += 1
+    here = os.path.dirname(os.path.abspath(__file__))
+    root = os.path.abspath(root or (os.path.dirname(here) if os.path.basename(here).lower() == "scripts" else here))
+    OUTDIR = os.path.abspath(out or os.path.join(root, "output"))
+    if files:                                           # kiểu cũ: liệt kê từng tệp
+        miss = [x for x in files if not os.path.exists(x)]
+        if miss: sys.exit("Không tìm thấy tệp: " + ", ".join(miss))
+        extra, jl = {}, []
+        for x in files:
+            k = next((v for pre, v in KEYS.items() if os.path.basename(x).lower().startswith(pre)), None)
+            if k: extra[k] = x
+            else: jl.append(x)
+    else:                                               # kiểu mới: tự đọc thư mục data/
+        data = os.path.join(root, "data")
+        if not os.path.isdir(data): sys.exit(f"Không thấy thư mục {data}. Chạy sap_xep.py trước, hoặc dùng --goc <thư mục gốc>.")
+        jl, extra = discover(data)
+        auto_idioms(root, extra)
+    if not jl: sys.exit("Không có tệp Wiktionary (.jsonl) nào trong data/raw/wiktionary/.")
+    print("Đầu vào đang dùng:")
+    for f in jl: print("  Wiktionary :", f)
+    for k, v in sorted(extra.items()): print(f"  {k:10} :", v)
+    print("Đầu ra:", OUTDIR)
+    main(jl, **extra)
+
+
 if __name__ == "__main__":
-    a = sys.argv[1:]
-    if not a: sys.exit(__doc__)
-    miss = [x for x in a if not os.path.exists(x)]
-    if miss: sys.exit("Không tìm thấy tệp: " + ", ".join(miss) + "\nKiểm tra tên tệp và thư mục đang đứng khi chạy lệnh.")
-    KEYS = {"unihan": "unihan", "cedict": "cedict", "phienam": "phienam", "chinese-hanviet": "tsv", "ktraditionalvariant": "tvar", "opensubs": "freq", "sidwell": "sidwell", "thanhngu": "idioms"}
-    miss = [x for x in a if not os.path.exists(x)]
-    if miss: sys.exit("Không tìm thấy tệp: " + ", ".join(miss))
-    extra, files = {}, []
-    for x in a:
-        k = next((v for pre, v in KEYS.items() if os.path.basename(x).lower().startswith(pre)), None)
-        if k: extra[k] = x
-        else: files.append(x)
-    main(files, **extra)
+    cli()

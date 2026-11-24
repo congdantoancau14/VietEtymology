@@ -46,15 +46,15 @@ def headwords(entry):
     return [x for x in out if 3 <= len(x.split()) <= 12 and not re.search(r"\d|từ điển|ừ điển", x, re.I)]
 
 
-def main(pdf, first=1, last=None):
+def main(pdf, first=1, last=None, out="thanhngu-dau-muc.txt"):
     last = last or int(re.search(r"Pages:\s+(\d+)", run("pdfinfo", pdf)).group(1))
     seen = set()
     for p in range(first, last + 1):
         for e in page_entries(pdf, p):
             for h in headwords(e): seen.add(h.lower())
         if p % 50 == 0: print("trang", p, "- đầu mục:", len(seen), flush=True)
-    open("thanhngu-dau-muc.txt", "w", encoding="utf8").write("\n".join(sorted(seen)))
-    print("Xong:", len(seen), "đầu mục -> thanhngu-dau-muc.txt")
+    open(out, "w", encoding="utf8").write("\n".join(sorted(seen)))
+    print("Xong:", len(seen), "đầu mục ->", out)
 
 
 if __name__ == "__main__":

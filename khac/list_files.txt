@@ -1,0 +1,724 @@
+ Volume in drive D is New Volume
+ Volume Serial Number is BC65-3052
+
+ Directory of D:\Documents\HanViet\VietEtymology
+
+11/24/2026  08:58 AM    <DIR>          .
+11/14/2026  05:41 PM    <DIR>          ..
+11/24/2026  09:01 AM                71 .gitignore
+11/24/2026  08:47 AM    <DIR>          data
+11/24/2026  09:06 AM    <DIR>          khac
+11/24/2026  08:47 AM    <DIR>          output
+11/19/2026  03:11 PM               162 README.md
+11/24/2026  08:33 AM             5,123 sap_xep.py
+11/24/2026  08:47 AM    <DIR>          scripts
+11/24/2026  08:47 AM    <DIR>          web
+               3 File(s)          5,356 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git
+
+11/24/2026  08:58 AM    <DIR>          ..
+11/19/2026  03:13 PM            12,288 .MERGE_MSG.swp
+11/24/2026  08:39 AM                24 COMMIT_EDITMSG
+11/23/2026  04:12 PM               345 config
+11/18/2026  05:05 PM                73 description
+11/19/2026  03:49 PM               109 FETCH_HEAD
+11/18/2026  05:06 PM                21 HEAD
+11/18/2026  05:05 PM    <DIR>          hooks
+11/24/2026  08:39 AM             2,362 index
+11/18/2026  05:05 PM    <DIR>          info
+11/18/2026  05:05 PM    <DIR>          logs
+11/24/2026  08:39 AM    <DIR>          objects
+11/19/2026  03:11 PM                41 ORIG_HEAD
+11/18/2026  05:14 PM    <DIR>          refs
+11/19/2026  03:52 PM               459 sourcetreeconfig.json
+               9 File(s)         15,722 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\hooks
+
+11/18/2026  05:05 PM    <DIR>          .
+11/18/2026  05:05 PM               478 applypatch-msg.sample
+11/18/2026  05:05 PM             1,972 commit-msg.sample
+11/18/2026  05:05 PM             4,611 fsmonitor-watchman.sample
+11/18/2026  05:05 PM               189 post-update.sample
+11/18/2026  05:05 PM               424 pre-applypatch.sample
+11/18/2026  05:05 PM             1,649 pre-commit.sample
+11/18/2026  05:05 PM               416 pre-merge-commit.sample
+11/18/2026  05:05 PM             1,374 pre-push.sample
+11/18/2026  05:05 PM             4,898 pre-rebase.sample
+11/18/2026  05:05 PM               544 pre-receive.sample
+11/18/2026  05:05 PM             1,492 prepare-commit-msg.sample
+11/18/2026  05:05 PM             2,783 push-to-checkout.sample
+11/18/2026  05:05 PM             2,308 sendemail-validate.sample
+11/18/2026  05:05 PM             3,650 update.sample
+              14 File(s)         26,788 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\info
+
+11/18/2026  05:05 PM    <DIR>          .
+11/18/2026  05:05 PM               240 exclude
+               1 File(s)            240 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\logs
+
+11/18/2026  05:05 PM    <DIR>          .
+11/24/2026  08:39 AM             1,441 HEAD
+11/18/2026  05:14 PM    <DIR>          refs
+               1 File(s)          1,441 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\logs\refs
+
+11/18/2026  05:14 PM    <DIR>          .
+11/18/2026  05:05 PM    <DIR>          ..
+11/18/2026  05:06 PM    <DIR>          heads
+11/18/2026  05:14 PM    <DIR>          remotes
+               0 File(s)              0 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\logs\refs\heads
+
+11/18/2026  05:06 PM    <DIR>          .
+11/18/2026  05:14 PM    <DIR>          ..
+11/24/2026  08:39 AM             1,255 main
+               1 File(s)          1,255 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\logs\refs\remotes
+
+11/18/2026  05:14 PM    <DIR>          .
+11/18/2026  05:14 PM    <DIR>          ..
+11/19/2026  03:11 PM    <DIR>          origin
+               0 File(s)              0 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\logs\refs\remotes\origin
+
+11/19/2026  03:11 PM    <DIR>          .
+11/18/2026  05:14 PM    <DIR>          ..
+11/19/2026  03:11 PM               139 HEAD
+11/24/2026  08:40 AM               744 main
+               2 File(s)            883 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects
+
+11/24/2026  08:39 AM    <DIR>          .
+11/18/2026  05:14 PM    <DIR>          02
+11/18/2026  05:05 PM    <DIR>          0a
+11/24/2026  08:39 AM    <DIR>          15
+11/22/2026  06:33 PM    <DIR>          16
+11/18/2026  05:05 PM    <DIR>          19
+11/22/2026  06:33 PM    <DIR>          1c
+11/18/2026  05:05 PM    <DIR>          28
+11/18/2026  05:05 PM    <DIR>          29
+11/19/2026  03:09 PM    <DIR>          2b
+11/22/2026  06:34 PM    <DIR>          32
+11/22/2026  06:33 PM    <DIR>          37
+11/18/2026  05:05 PM    <DIR>          38
+11/22/2026  06:33 PM    <DIR>          39
+11/19/2026  03:11 PM    <DIR>          3b
+11/24/2026  08:39 AM    <DIR>          3f
+11/22/2026  06:33 PM    <DIR>          41
+11/19/2026  03:09 PM    <DIR>          47
+11/24/2026  08:39 AM    <DIR>          48
+11/19/2026  03:11 PM    <DIR>          49
+11/19/2026  03:09 PM    <DIR>          4c
+11/22/2026  06:33 PM    <DIR>          4d
+11/24/2026  08:39 AM    <DIR>          58
+11/18/2026  05:05 PM    <DIR>          5c
+11/22/2026  06:33 PM    <DIR>          5f
+11/19/2026  03:10 PM    <DIR>          62
+11/24/2026  08:39 AM    <DIR>          66
+11/24/2026  08:39 AM    <DIR>          72
+11/18/2026  05:05 PM    <DIR>          78
+11/19/2026  03:11 PM    <DIR>          81
+11/18/2026  05:05 PM    <DIR>          82
+11/19/2026  03:09 PM    <DIR>          84
+11/24/2026  08:39 AM    <DIR>          89
+11/24/2026  08:39 AM    <DIR>          8c
+11/19/2026  03:09 PM    <DIR>          8e
+11/24/2026  08:39 AM    <DIR>          97
+11/19/2026  03:20 PM    <DIR>          98
+11/24/2026  08:39 AM    <DIR>          a9
+11/19/2026  03:09 PM    <DIR>          b2
+11/24/2026  08:39 AM    <DIR>          b3
+11/19/2026  03:11 PM    <DIR>          b9
+11/24/2026  08:39 AM    <DIR>          ba
+11/24/2026  08:39 AM    <DIR>          bc
+11/22/2026  06:33 PM    <DIR>          bf
+11/19/2026  03:10 PM    <DIR>          ca
+11/24/2026  08:39 AM    <DIR>          da
+11/19/2026  03:09 PM    <DIR>          db
+11/22/2026  06:33 PM    <DIR>          e4
+11/24/2026  08:39 AM    <DIR>          e6
+11/24/2026  08:39 AM    <DIR>          e9
+11/24/2026  08:39 AM    <DIR>          ec
+11/19/2026  03:11 PM    <DIR>          ee
+11/22/2026  06:33 PM    <DIR>          f0
+11/24/2026  08:39 AM    <DIR>          f4
+11/24/2026  08:39 AM    <DIR>          f6
+11/22/2026  06:34 PM    <DIR>          fb
+11/19/2026  03:11 PM    <DIR>          fe
+11/18/2026  05:05 PM    <DIR>          info
+11/18/2026  05:05 PM    <DIR>          pack
+               0 File(s)              0 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\02
+
+11/18/2026  05:14 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/18/2026  05:14 PM               163 1ab41a77250ff282ce4f034e6a27d4db4a3bf0
+               1 File(s)            163 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\0a
+
+11/18/2026  05:05 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/18/2026  05:05 PM             5,110 86be03fd7f17212baf12d82ad78fec5053e754
+               1 File(s)          5,110 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\15
+
+11/24/2026  08:39 AM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/24/2026  08:39 AM             1,582 ec677cf36ecea2eed6562a65532621ae78b7bd
+               1 File(s)          1,582 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\16
+
+11/22/2026  06:33 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/22/2026  06:33 PM             2,158 f7089c8c83b605ec69141120246b56cd65fab6
+               1 File(s)          2,158 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\19
+
+11/18/2026  05:05 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/18/2026  05:05 PM        15,129,996 c2ced35a3f96f97395862685f2d53e1896f068
+               1 File(s)     15,129,996 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\1c
+
+11/22/2026  06:33 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/22/2026  06:33 PM         2,091,726 8baa2b50b575d465faed68061757befaac6447
+               1 File(s)      2,091,726 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\28
+
+11/18/2026  05:05 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/18/2026  05:05 PM               130 aa5df9abe07ad725fbf5b9626d5ed9e07e6c3a
+               1 File(s)            130 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\29
+
+11/18/2026  05:05 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/18/2026  05:05 PM             2,298 54e7fff1911be7ffd458a9f4fc8e83c9321f6e
+               1 File(s)          2,298 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\2b
+
+11/19/2026  03:09 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/19/2026  03:09 PM         4,515,393 bf392ee359703a3ae924c8f121d3722bc41526
+               1 File(s)      4,515,393 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\32
+
+11/22/2026  06:34 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/22/2026  06:34 PM               171 1d06d0192490b5795dd9db276d8b09d8fdc691
+               1 File(s)            171 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\37
+
+11/22/2026  06:33 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/22/2026  06:33 PM             5,533 3fea2266a2eddfc0531c8c6a2782e29757ebde
+               1 File(s)          5,533 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\38
+
+11/18/2026  05:05 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/18/2026  05:05 PM            11,873 a0e7fd62e6e37f59cca761fae516391d74b669
+               1 File(s)         11,873 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\39
+
+11/22/2026  06:33 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/22/2026  06:33 PM            19,399 0204d5fd148d88c235ab1d1443263b3efda9a1
+               1 File(s)         19,399 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\3b
+
+11/19/2026  03:11 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/19/2026  03:11 PM               288 61b2008494621ff999a9d24cf79089710a574f
+               1 File(s)            288 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\3f
+
+11/24/2026  08:39 AM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/24/2026  08:39 AM           665,767 5ef71639898c4738f0fb3a898a12e224a12ea4
+               1 File(s)        665,767 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\41
+
+11/22/2026  06:33 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/22/2026  06:33 PM           916,367 d4466984943bec6f8bf515368194768880e597
+               1 File(s)        916,367 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\47
+
+11/19/2026  03:09 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/19/2026  03:09 PM                67 9b075d3694b617671a7a555bc17158bea20605
+               1 File(s)             67 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\48
+
+11/24/2026  08:39 AM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/18/2026  05:14 PM               255 255384e9e82a0f85c6fe1ece8259ab45113bcb
+11/24/2026  08:39 AM               346 8886047ddc6cf541726c2fe125d24f6559f01c
+               2 File(s)            601 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\49
+
+11/19/2026  03:11 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/19/2026  03:11 PM               288 0cd594490ed23e2b5ed692d1e670564867b70e
+               1 File(s)            288 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\4c
+
+11/19/2026  03:09 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/19/2026  03:09 PM         1,637,840 9f3212cfeb8a815a0119f208abc411dc88b241
+               1 File(s)      1,637,840 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\4d
+
+11/22/2026  06:33 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/22/2026  06:33 PM            64,736 aaf6d1ba8df58265ab364f3b543c240457a0a8
+               1 File(s)         64,736 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\58
+
+11/24/2026  08:39 AM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/24/2026  08:39 AM         2,203,042 027761a58a72c7cadd35fc064ae2bac460ee15
+               1 File(s)      2,203,042 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\5c
+
+11/18/2026  05:05 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/18/2026  05:05 PM         1,585,361 fb68bfa39d33cd56993abeda4f23452f5ddb35
+               1 File(s)      1,585,361 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\5f
+
+11/22/2026  06:33 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/19/2026  03:20 PM               396 623358c7642a3cc0e74593ea6f74b1ef53c302
+11/22/2026  06:33 PM            12,767 7a35c64b1a6e05355d35e1d0d13b6180d699fc
+               2 File(s)         13,163 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\62
+
+11/19/2026  03:10 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/19/2026  03:10 PM               363 c8056cb5fb2f348d7176a251dcb5ce262191c9
+               1 File(s)            363 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\66
+
+11/24/2026  08:39 AM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/24/2026  08:39 AM           477,903 5e02e7f8ea6e7182b36d38ce01d89e5205e08e
+               1 File(s)        477,903 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\72
+
+11/24/2026  08:39 AM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/24/2026  08:39 AM           158,649 9c7554ad4f8f64c38169241df229d1ea8a8cb4
+               1 File(s)        158,649 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\78
+
+11/18/2026  05:05 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/18/2026  05:05 PM         3,087,303 90b400e5d65718ecaccfdd55cdc856b191d4d6
+               1 File(s)      3,087,303 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\81
+
+11/19/2026  03:11 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/19/2026  03:13 PM               132 19fa202dacd806a67fc7e94a4efe0752ee3133
+               1 File(s)            132 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\82
+
+11/18/2026  05:05 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/18/2026  05:05 PM            10,512 b6e2ccc518c2376544cd441eb50eb738170857
+               1 File(s)         10,512 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\84
+
+11/19/2026  03:09 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/19/2026  03:09 PM             4,715 5c88715c0e511f48d5e309bd1cb95819c349cf
+11/18/2026  05:05 PM        40,221,267 d76778f4d6e4d7ecebc7525ec9172c66807f74
+               2 File(s)     40,225,982 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\89
+
+11/24/2026  08:39 AM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/24/2026  08:39 AM             5,104 f4eb6da1a2155747dd46f833cb6da9c2692b24
+               1 File(s)          5,104 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\8c
+
+11/24/2026  08:39 AM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/24/2026  08:39 AM            13,114 f0de1b00010eadbea3b3c076882130116bf6c1
+               1 File(s)         13,114 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\8e
+
+11/19/2026  03:09 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/19/2026  03:09 PM             1,462 cd00a22d14e924e482222662d51aad2e563c5f
+               1 File(s)          1,462 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\97
+
+11/24/2026  08:39 AM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/24/2026  08:39 AM             2,171 557eee4434a11052a92264191a3a16e5d7ad40
+               1 File(s)          2,171 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\98
+
+11/19/2026  03:20 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/19/2026  03:20 PM               372 ec1f1b5fa104f705b98fb504625febad6187d0
+               1 File(s)            372 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\a9
+
+11/24/2026  08:39 AM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/24/2026  08:39 AM         2,572,462 0184579854c5dd582ff57a294cf123b01f7ba4
+               1 File(s)      2,572,462 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\b2
+
+11/19/2026  03:09 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/19/2026  03:09 PM            11,394 2b5d55f7b28dbb619459acdff27441b36821ce
+11/19/2026  03:09 PM             2,113 8f2437cd3e6b13a5b8bd88017551c1b279e60a
+               2 File(s)         13,507 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\b3
+
+11/24/2026  08:39 AM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/24/2026  08:39 AM             7,661 bab3a8ac24cb1985f4918d6a568e61c7971e2c
+               1 File(s)          7,661 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\b9
+
+11/19/2026  03:11 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/19/2026  03:11 PM               846 5a12dabbf47ae584465aa2447dba1db4f1b2af
+               1 File(s)            846 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\ba
+
+11/24/2026  08:39 AM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/24/2026  08:39 AM             1,244 fb8e1160ca19d85d62be1510963bcc138be977
+               1 File(s)          1,244 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\bc
+
+11/24/2026  08:39 AM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/24/2026  08:39 AM           321,735 999c5db933e060acf436f87e61063966995fcf
+               1 File(s)        321,735 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\bf
+
+11/22/2026  06:33 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/22/2026  06:33 PM            16,266 f5139aedfe33d95b05a3047d181881d848c8c3
+               1 File(s)         16,266 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\ca
+
+11/19/2026  03:10 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/19/2026  03:10 PM               160 2c913cd59dd2021f48f4741d749d6346d8436b
+               1 File(s)            160 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\da
+
+11/24/2026  08:39 AM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/22/2026  06:33 PM           216,543 2c4bb0bf260793a8ac3d4410302e0260a27363
+11/18/2026  05:05 PM               350 37bee351e0773bc3dc6ce2b6d7ea6a997fe454
+11/24/2026  08:39 AM           279,164 85b462cdc0750b49ac6e47ddb87111ad312b39
+               3 File(s)        496,057 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\db
+
+11/19/2026  03:09 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/19/2026  03:09 PM            12,456 27967fbab16af74007ef1e50bdccfa20908914
+               1 File(s)         12,456 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\e4
+
+11/22/2026  06:33 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/22/2026  06:33 PM             1,333 aa490b6473034510fc6275b94f2c47d46ef405
+               1 File(s)          1,333 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\e6
+
+11/24/2026  08:39 AM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/24/2026  08:39 AM         2,833,127 3092de8fd38e8f1c170b53312786c81adf63cc
+               1 File(s)      2,833,127 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\e9
+
+11/24/2026  08:39 AM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/24/2026  08:39 AM               169 4f728a2c0db24f4472da9da5740dc83275790f
+               1 File(s)            169 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\ec
+
+11/24/2026  08:39 AM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/24/2026  08:39 AM            18,504 a0a102a5875f0abaa3b2a25cd1e6303d4b4904
+               1 File(s)         18,504 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\ee
+
+11/19/2026  03:11 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/19/2026  03:11 PM               838 95be3ae2526093803fb7787e511164a3ae1f13
+               1 File(s)            838 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\f0
+
+11/22/2026  06:33 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/22/2026  06:33 PM             4,530 cbf4e9bd4fe2a8647b7450720b2fa96388d4a2
+               1 File(s)          4,530 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\f4
+
+11/24/2026  08:39 AM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/24/2026  08:39 AM             1,086 ff070f1af692cc44d9ba67efa358ed46f77bd4
+               1 File(s)          1,086 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\f6
+
+11/24/2026  08:39 AM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/24/2026  08:39 AM           343,577 eb3d19f69f8250f5be6e362eed0f4dd6388478
+               1 File(s)        343,577 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\fb
+
+11/22/2026  06:34 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/22/2026  06:34 PM               606 6d4bf432ae2776e9a80e782146dd7768f20247
+               1 File(s)            606 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\fe
+
+11/19/2026  03:11 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+11/19/2026  03:11 PM                78 7b3135629c824fcfe90d0c628e841e3c0cf61e
+               1 File(s)             78 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\info
+
+11/18/2026  05:05 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+               0 File(s)              0 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\objects\pack
+
+11/18/2026  05:05 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          ..
+               0 File(s)              0 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\refs
+
+11/18/2026  05:14 PM    <DIR>          .
+11/24/2026  08:39 AM    <DIR>          heads
+11/18/2026  05:14 PM    <DIR>          remotes
+11/18/2026  05:05 PM    <DIR>          tags
+               0 File(s)              0 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\refs\heads
+
+11/24/2026  08:39 AM    <DIR>          .
+11/18/2026  05:14 PM    <DIR>          ..
+11/24/2026  08:39 AM                41 main
+               1 File(s)             41 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\refs\remotes
+
+11/18/2026  05:14 PM    <DIR>          .
+11/18/2026  05:14 PM    <DIR>          ..
+11/24/2026  08:40 AM    <DIR>          origin
+               0 File(s)              0 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\refs\remotes\origin
+
+11/24/2026  08:40 AM    <DIR>          .
+11/18/2026  05:14 PM    <DIR>          ..
+11/19/2026  03:11 PM                30 HEAD
+11/24/2026  08:40 AM                41 main
+               2 File(s)             71 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\.git\refs\tags
+
+11/18/2026  05:05 PM    <DIR>          .
+11/18/2026  05:14 PM    <DIR>          ..
+               0 File(s)              0 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\data
+
+11/24/2026  08:47 AM    <DIR>          .
+11/24/2026  08:58 AM    <DIR>          ..
+11/24/2026  08:47 AM    <DIR>          derived
+11/24/2026  08:47 AM             1,493 NGUON_DU_LIEU.md
+11/24/2026  08:47 AM    <DIR>          raw
+               1 File(s)          1,493 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\data\derived
+
+11/24/2026  08:47 AM    <DIR>          .
+11/24/2026  08:47 AM    <DIR>          ..
+11/23/2026  08:59 AM           413,663 thanhngu-dau-muc.txt
+               1 File(s)        413,663 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\data\raw
+
+11/24/2026  08:47 AM    <DIR>          .
+11/24/2026  08:47 AM    <DIR>          ..
+11/24/2026  08:47 AM    <DIR>          han_viet
+11/24/2026  08:47 AM    <DIR>          nam_a
+11/24/2026  08:47 AM    <DIR>          tan_suat
+11/24/2026  08:58 AM    <DIR>          tham_khao
+11/24/2026  08:47 AM    <DIR>          thanh_ngu
+11/24/2026  08:47 AM    <DIR>          wiktionary
+               0 File(s)              0 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\data\raw\han_viet
+
+11/24/2026  08:47 AM    <DIR>          .
+11/24/2026  08:47 AM    <DIR>          ..
+11/19/2026  02:26 PM         9,878,223 cedict_ts.u8
+11/13/2026  04:23 PM           449,017 chinese-hanviet-cognates.tsv
+05/27/2019  03:49 AM            49,140 kTraditionalVariant.json
+11/13/2026  04:39 PM           112,944 phienam.txt
+11/14/2026  05:40 PM         8,844,571 Unihan_Readings.txt
+               5 File(s)     19,333,895 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\data\raw\nam_a
+
+11/24/2026  08:47 AM    <DIR>          .
+11/24/2026  08:47 AM    <DIR>          ..
+11/22/2026  07:30 PM         3,543,150 Sidwell-Austroasiatic_phylogenetic-dataset-2015.xlsm
+               1 File(s)      3,543,150 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\data\raw\tan_suat
+
+11/24/2026  08:47 AM    <DIR>          .
+11/24/2026  08:47 AM    <DIR>          ..
+11/13/2026  05:56 PM         1,847,099 opensubs-freq.txt
+               1 File(s)      1,847,099 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\data\raw\tham_khao
+
+11/24/2026  08:58 AM    <DIR>          .
+11/24/2026  08:47 AM    <DIR>          ..
+11/23/2026  04:14 PM           365,232 bienthehanviet.pdf
+11/23/2026  04:17 PM           332,805 BIEN_THE_TU_HAN_VIET-_FILE_PDF_DANG.pdf
+11/23/2026  04:50 PM           949,222 T?_H n-Vi?t.pdf
+11/21/2026  04:05 PM           824,591 vietnamese-etymology.pdf
+               4 File(s)      2,471,850 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\data\raw\thanh_ngu
+
+11/24/2026  08:47 AM    <DIR>          .
+11/24/2026  08:47 AM    <DIR>          ..
+11/22/2026  07:55 PM            17,129 cadao-tuc-ngu.txt
+11/11/2026  11:45 PM         3,435,764 tudienthanhngu.pdf
+11/22/2026  05:30 PM           303,503 Tuyen tap Thanh ngu tuc ngu ca dao Viet Anh.epub
+               3 File(s)      3,756,396 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\data\raw\wiktionary
+
+11/24/2026  08:47 AM    <DIR>          .
+11/24/2026  08:47 AM    <DIR>          ..
+11/14/2026  10:01 PM        83,424,329 kaikki.org-dictionary-Vietnamese.jsonl
+11/14/2026  04:37 PM       286,325,568 vi-extract.jsonl
+               2 File(s)    369,749,897 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\khac
+
+11/24/2026  09:06 AM    <DIR>          .
+11/24/2026  08:58 AM    <DIR>          ..
+11/24/2026  09:06 AM                 0 list_files.txt
+11/24/2026  09:06 AM            29,441 list_items.txt
+               2 File(s)         29,441 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\output
+
+11/24/2026  08:47 AM    <DIR>          .
+11/24/2026  08:58 AM    <DIR>          ..
+11/23/2026  02:18 PM             6,365 bao_cao.txt
+11/23/2026  02:18 PM        12,417,301 entries.json
+11/23/2026  02:18 PM            10,088 mau_chua_xac_dinh.txt
+11/23/2026  02:18 PM               474 ung_vien_han_viet.txt
+               4 File(s)     12,434,228 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\scripts
+
+11/24/2026  08:47 AM    <DIR>          .
+11/24/2026  08:58 AM    <DIR>          ..
+11/24/2026  08:33 AM            51,637 phan_loai.py
+11/24/2026  08:33 AM             3,029 trich_thanh_ngu.py
+               2 File(s)         54,666 bytes
+
+ Directory of D:\Documents\HanViet\VietEtymology\web
+
+11/24/2026  08:47 AM    <DIR>          .
+11/24/2026  08:58 AM    <DIR>          ..
+11/19/2026  03:35 PM            12,825 Ch£ gi?i ngu?n g?c t?.html
+11/23/2026  01:34 PM            30,889 Tra t? nguyˆn.html
+               2 File(s)         43,714 bytes
+
+     Total Files Listed:
+             124 File(s)    493,233,650 bytes
+             250 Dir(s)  144,822,407,168 bytes free
