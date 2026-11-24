@@ -75,7 +75,7 @@ RX_ALIAS = re.compile(r"^dạng (chữ hán|nôm) của (.+)$", re.I)
 TONE_ID = {"\u0300": "1", "\u0301": "2", "\u0309": "3", "\u0303": "4", "\u0323": "5"}
 TONES = {"\u0300", "\u0301", "\u0303", "\u0309", "\u0323"}
 ONS = sorted(["ngh", "ng", "nh", "ph", "th", "tr", "ch", "kh", "gh", "gi", "qu", "b", "c", "d", "đ", "g", "h", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "x"], key=len, reverse=True)
-SCORE = {"R1h": 5, "R1k": 4, "R3f": 1, "R1i": 1, "R1j": 1, "R6": 2, "R6r": 1, "R6o": 2, "R4f": 2, "R4g": 1, "R5c": 1, "R2g": 1, "T1": 4, "R1c": 4, "R1e": 4, "R1f": 4, "R4c": 1, "R4d": 3, "R4e": 1, "R2a": 6, "R2b": 6, "R1a+U": 6, "R1a": 5, "R1b": 5, "R2c": 4, "R2d": 3, "R2e": 2, "R2f": 6, "R3d": 4, "R3": 4, "R4a": 3, "R4b": 3, "R5": 2, "R5b": 1, "R0": 0}
+SCORE = {"R1h": 5, "S2": 6, "R1m": 1, "R5d": 1, "R5e": 2, "R1k": 4, "R3f": 1, "R1i": 1, "R1j": 1, "R6": 2, "R6r": 1, "R6o": 2, "R4f": 2, "R4g": 1, "R5c": 1, "R2g": 1, "T1": 4, "R1c": 4, "R1e": 4, "R1f": 4, "R4c": 1, "R4d": 3, "R4e": 1, "R2a": 6, "R2b": 6, "R1a+U": 6, "R1a": 5, "R1b": 5, "R2c": 4, "R2d": 3, "R2e": 2, "R2f": 6, "R3d": 4, "R3": 4, "R4a": 3, "R4b": 3, "R5": 2, "R5b": 1, "R0": 0}
 STOP = {"the", "and", "for", "with", "one", "who", "that", "are", "was", "his", "her", "its", "used", "from", "into", "not",
         "of", "to", "or", "in", "as", "be", "an", "như", "của", "là", "một", "các", "có", "và", "để", "trong", "được",
         "những", "cái", "người", "thì", "với", "khi", "này", "đó", "nói", "chung", "hoặc", "cho", "không", "bị", "đã", "sẽ", "rất"}
@@ -183,6 +183,29 @@ def build_hvlex(phienam, tsv, tvar, uni):
             m = out.get(sm, set()) | out.get(t, set())
             if m: out[sm] = out[t] = m
     return out, words, clean
+
+
+def load_sidwell(path):
+    """Sidwell (2015), 200 nghĩa cơ bản x ~130 ngôn ngữ Nam Á, có mã đồng nguyên. Trả về: dạng tiếng Việt -> chứng cứ."""
+    import openpyxl
+    rows = list(openpyxl.load_workbook(path, read_only=True, data_only=True)["Sheet1"].iter_rows(values_only=True))
+    h = next(i for i, r in enumerate(rows) if r and r[0] == "Number")
+    by = collections.defaultdict(list)
+    for r in rows[h + 1:]:
+        if r[0] is not None and r[3]: by[(r[0], r[1])].append(r)
+    out = {}
+    for rs in by.values():
+        for v in rs:
+            if not str(v[3]).startswith("Vietnamese") or v[5] in (None, "", "*"): continue
+            oth = [x for x in rs if x is not v and x[5] == v[5] and x[3] and not str(x[3]).startswith("Vietnamese")]
+            ext = [x for x in oth if "VIETIC" not in str(x[2]).upper()]
+            vie = [x for x in oth if "VIETIC" in str(x[2]).upper()]
+            rec = re.search(r"\*\S+", str(v[6])) if v[6] and "Vietic" in str(v[6]) else None
+            ev = dict(ext=[f"{x[3]} {x[4]}" for x in ext], viet=[f"{x[3]} {x[4]}" for x in vie], recon=rec.group(0) if rec else "", gloss=v[1])
+            for f in re.split(r"[/;,]", str(v[4])):
+                f = f.strip()
+                if f and f != "*" and re.fullmatch(r"[^\W\d_]+", f): out.setdefault(canon(f), ev)
+    return out
 
 
 def load_cedict(path, hv):
@@ -375,6 +398,35 @@ def peek(e):
     return g, t, c
 
 
+TAGMAP = {"thtục": "thông tục", "thông tục": "thông tục", "kng.": "khẩu ngữ", "kng": "khẩu ngữ", "khẩu ngữ": "khẩu ngữ", "từ lóng": "lóng", "lóng": "lóng",
+          "tl.": "lóng", "đphg": "phương ngữ", "phương ngữ": "phương ngữ", "ph.": "phương ngữ", "vch.": "văn chương", "văn chương": "văn chương",
+          "cũ": "cũ", "lỗi thời": "lỗi thời", "hiếm": "hiếm", "trang nhã": "trang nhã", "từ mới": "từ mới", "phật giáo": "Phật giáo"}
+EN_TAGS = {"dated": "cũ", "archaic": "cổ", "obsolete": "lỗi thời", "rare": "hiếm", "slang": "lóng", "colloquial": "khẩu ngữ", "dialectal": "phương ngữ",
+           "literary": "văn chương", "vulgar": "thô tục", "informal": "thông tục", "humorous": "đùa", "derogatory": "miệt thị", "offensive": "xúc phạm",
+           "poetic": "thơ ca", "euphemistic": "nói tránh", "formal": "trang trọng", "regional": "phương ngữ"}
+
+
+def tags_of(e):
+    """Thẻ phụ (không phải nguồn gốc): phong cách, niên đại, phương ngữ vùng, ngành. Lấy từ tiền tố ngoặc của nghĩa, thẻ nghĩa tiếng Anh, danh mục ngành."""
+    S = (e.get("senses") or [{}])[0]
+    out = []
+    g = ((S.get("glosses") or [""])[0]).strip()
+    while True:
+        m = re.match(r"^\(([^)]{1,60})\)\s*", g)
+        if not m: break
+        for x in re.split(r"[,;]", m.group(1)):
+            x = x.strip()
+            if x: out.append(TAGMAP.get(x.lower(), x))
+        g = g[m.end():]
+    for t in (S.get("tags") or []): 
+        if t in EN_TAGS: out.append(EN_TAGS[t])
+    for t in (S.get("raw_tags") or []): out.append(EN_TAGS.get(str(t).lower(), str(t)))
+    for c in e.get("categories") or []:
+        if isinstance(c, str) and re.fullmatch(r"[^\W\d_]+(?: [^\W\d_]+){0,3}", c) and not re.search(r"tiếng|Mục từ|Trang|^Từ |Danh từ|Động từ|Tính từ|Phó từ|Đại từ|Thán từ|Thành ngữ|Tục ngữ|Điệp|Bảng|Khối", c):
+            out.append("ngành: " + c)
+    return list(dict.fromkeys(out))[:8]
+
+
 def meta_of(e, r):
     """Thông tin phụ lấy từ dữ liệu: nghĩa gợi ý, phát âm Hà Nội, dạng viết CJK (Nôm/Hán), chữ Hán gốc từ từ nguyên."""
     S = (e.get("senses") or [{}])[0]
@@ -391,7 +443,7 @@ def meta_of(e, r):
                        + [l[0] for l in e.get("etymology_links") or [] if l]
                        + [t.get("expansion", "") for t in e.get("etymology_templates") or [] if t.get("name") in HANT])
         han = " ".join(dict.fromkeys(RX_HAN.findall(src)))
-    return dict(gloss=gloss, ipa=ipa, cjk=cjk, han=han, pos=e.get("pos", ""))
+    return dict(gloss=gloss, ipa=ipa, cjk=cjk, han=han, pos=e.get("pos", ""), tags=tags_of(e))
 
 
 def read_file(path):
@@ -432,7 +484,7 @@ def read_file(path):
     return out, fmt, cats, tm
 
 
-def main(paths, unihan=None, cedict=None, phienam=None, tsv=None, tvar=None, freq=None):
+def main(paths, unihan=None, cedict=None, phienam=None, tsv=None, tvar=None, freq=None, sidwell=None, idioms=None):
     hv = {}
     if unihan:
         for l in open(unihan, encoding="utf8"):
@@ -440,6 +492,12 @@ def main(paths, unihan=None, cedict=None, phienam=None, tsv=None, tvar=None, fre
             if len(p) == 3 and p[1] == "kVietnamese":
                 hv.setdefault(chr(int(p[0][2:], 16)), set()).update(canon(x) for x in p[2].split())
         HVSYL.update(x for v in hv.values() for x in v)
+    SID = load_sidwell(sidwell) if sidwell else {}
+    IDI = set()
+    for f in ([idioms] if idioms else []):
+        for l in open(f, encoding="utf8"):
+            t = " ".join(canon(x) for x in re.findall(r"[^\W\d_]+", l.lower()))
+            if len(t.split()) >= 3: IDI.add(t)
     HVW = {}
     if phienam or tsv:
         hv, HVW, clean = build_hvlex(phienam, tsv, tvar, hv)
@@ -474,6 +532,23 @@ def main(paths, unihan=None, cedict=None, phienam=None, tsv=None, tvar=None, fre
                              note="Gốc Phạn/Pali, phiên âm qua chữ Hán rồi đọc theo âm Hán Việt (suy từ từ nguyên hoặc nghĩa CC-CEDICT). Cần rà.")
             cls[k] = merge(cls[k], r) if k in cls else r
 
+    if SID:                                            # đồng nguyên Nam Á theo Sidwell (2015)
+        first_n = {}
+        for (w, n) in cls: first_n[w] = min(first_n.get(w, n), n)
+        for (w, n), r in cls.items():
+            ev = SID.get(canon(w))
+            if not ev or n != first_n[w] or r["g"] == "bt": continue
+            lab = ("kt", "Nam Á") if ev["ext"] else (("kt", "Vietic") if ev["viet"] else None)
+            ctxt = "; ".join((ev["ext"] or ev["viet"])[:6])
+            if lab and r["rule"] == "R0":
+                r.update(g=lab[0], sub=lab[1], conf=2, rule="S2", decomp=False, recon=ev["recon"], cog=(ev["ext"] + ev["viet"])[:8],
+                         src="Sidwell (2015), bộ dữ liệu Nam Á (200 nghĩa cơ bản)",
+                         note="Cùng lớp đồng nguyên với: " + ctxt + ". Theo mã đồng nguyên của Sidwell; chưa loại trừ vay mượn do tiếp xúc.")
+            elif lab and (r["g"], r["sub"]) != lab:
+                r["note"] = (r["note"] + " " if r["note"] else "") + "Sidwell (2015) xếp cùng lớp đồng nguyên với: " + ctxt + "."
+                r["review"] = True
+            elif not lab and r["rule"] == "R0":
+                r["note"] = "Sidwell (2015): chưa thấy đồng nguyên trong 130 ngôn ngữ của bộ dữ liệu (không có nghĩa là chắc chắn không có)."
     for k, r in cls.items():                           # gắn chữ Hán/Nôm từ các mục "Dạng chữ Hán/Nôm của X"
         a = ALIAS.get(k[0])
         if not a: continue
@@ -494,6 +569,9 @@ def main(paths, unihan=None, cedict=None, phienam=None, tsv=None, tvar=None, fre
             r.update(g="han", sub="Hán Việt Việt hoá", conf=2 if hit else 1, rule="T1", review=True, decomp=False,
                      note="Theo bảng tham chiếu (Wikipedia tiếng Việt, “Từ Hán-Việt”): âm Việt hoá của chữ " + vh + ". Phân loại cổ/Việt hoá còn khác nhau giữa các nguồn; cần đối chiếu. Đồng âm dị nghĩa có thể gán nhầm.")
             if not r["meta"]["han"]: r["meta"]["han"] = vh
+        if r["rule"] == "R0" and IDI and " ".join(canon(x) for x in re.findall(r"[^\W\d_]+", w.lower())) in IDI:
+            r.update(g="ns", sub="Thành ngữ, tục ngữ", conf=2, rule="R5e", decomp=False, src="Danh sách thành ngữ/tục ngữ do người dùng cung cấp",
+                     note="Có trong từ điển thành ngữ, tục ngữ.")
         if r["rule"] == "R0" and HVW:
             kk = " ".join(canon(x) for x in w.split())
             if kk in HVW:
@@ -521,8 +599,6 @@ def main(paths, unihan=None, cedict=None, phienam=None, tsv=None, tvar=None, fre
             elif re.match(r"^\((?:phương ngữ|đphg)\b", raw, re.I): r.update(g="bt", sub="Phương ngữ", conf=1, rule="R6", decomp=False, lemma=(mref.group(1) if mref else ""), note="Giải nghĩa đánh dấu phương ngữ.")
             elif mref: r.update(g="bt", sub="Tham chiếu từ khác", conf=1, rule="R6r", decomp=False, lemma=mref.group(1), note="Wiktionary giải nghĩa bằng cách tham chiếu tới “" + mref.group(1) + "”.")
             elif mabb: r.update(g="ns", sub="Viết tắt, rút gọn", conf=2, rule="R4f", decomp=False, lemma=mabb.group(1), note="Viết tắt hoặc rút gọn của “" + mabb.group(1) + "”.")
-            elif re.match(r"^\((?:từ lóng|lóng|thông tục|khẩu ngữ|slang)", raw, re.I) or re.search(r"slang", raw[:25], re.I):
-                r.update(g="ns", sub="Từ lóng, khẩu ngữ", conf=1, rule="R4g", review=True, decomp=False, note="Suy từ nhãn phong cách trong giải nghĩa (lóng, thông tục, khẩu ngữ). Nhãn phong cách không phải nguồn gốc; cần rà.")
             elif r["meta"].get("pos") in ("phrase", "proverb"): r.update(g="ns", sub="Thành ngữ, tục ngữ", conf=2, rule="R5c", decomp=False, note="Wiktionary xếp là cụm từ/thành ngữ/tục ngữ.")
         if r["rule"] == "R0" and len(w.split()) == 1 and re.match(r"^(?:bl|tl|ml|kl)[aăâeêioôơuưy]{1,3}(?:ng|nh|ch|[cmnpt])?$", canon(w, False)):
             r.update(g="kt", sub="Việt–Mường", conf=1, rule="R2g", review=True, decomp=False, note="Phụ âm đầu ghép kiểu tiếng Việt cổ (bl-, tl-, ml-, kl-); giả định là từ kế thừa. Cần rà.")
@@ -555,6 +631,16 @@ def main(paths, unihan=None, cedict=None, phienam=None, tsv=None, tvar=None, fre
         if r["rule"] == "R0" and len(w.split()) > 1 and all_hv(w) and not any(canon(x) in NATIVE for x in w.split()):
             r.update(g="han", sub="Nghi là Hán Việt (suy luận)", conf=1, rule="R1i", review=True, hvsyl=True,
                      note="Mọi âm tiết đều có âm Hán Việt (Unihan) và không âm tiết nào xuất hiện như từ bản địa đứng riêng trong dữ liệu. Chưa có bằng chứng trực tiếp; không tính vào số Hán Việt.")
+    SINGLE = {canon(w): r for (w, n), r in atoms.items() if " " not in w and "-" not in w}
+    for (w, n), r in atoms.items():                      # ghép từ các từ đơn đã có
+        ps = w.split()
+        if r["rule"] == "R0" and len(ps) > 1 and all(canon(x) in SINGLE for x in ps):
+            if all(SINGLE[canon(x)]["g"] == "han" for x in ps):
+                r.update(g="han", sub="Nghi là Hán Việt (suy luận)", conf=1, rule="R1m", review=True, hvsyl=True, decomp=False,
+                         note="Ghép từ các từ đơn đã xác định thuộc nhóm Hán: " + " + ".join(ps) + ". Chưa có bằng chứng trực tiếp.")
+            else:
+                r.update(g="ns", sub="Từ ghép", conf=1, rule="R5d", review=True, decomp=False,
+                         note="Ghép từ các từ đơn đã có trong từ điển: " + " + ".join(ps) + ". Chưa loại trừ khả năng là từ vay phiên âm.")
     have = {w for w, _ in atoms}
     for s, lst in stubs.items():
         if s in have: continue
@@ -576,7 +662,7 @@ def main(paths, unihan=None, cedict=None, phienam=None, tsv=None, tvar=None, fre
         used.add(id_); first.setdefault(w, id_)
         d = {"id": id_, "w": w, "gloss": r["meta"]["gloss"], "han": r["meta"]["han"], "cjk": r["meta"]["cjk"], "ipa": r["meta"]["ipa"], "L": [[r["g"], ("Nhiều âm tiết" if (" " in w or "-" in w) else "Một âm tiết") if r["g"] == "cr" else r["sub"]]] + [list(x) for x in r.get("alt", [])], "conf": r["conf"], "recon": r["recon"],
              "cog": "; ".join(r["cog"]), "doublets": r["dbl"], "note": r["note"],
-             "src": "Wiktionary (kaikki.org), CC BY-SA", "rule": r["rule"], "review": r["review"], "parts": r.get("parts", []), "variants": VARIANTS.get(w, [])[:8], "lemma": r.get("lemma", ""), "freq": FREQ.get(unicodedata.normalize("NFC", w.lower()), 0)}
+             "src": r.get("src", "Wiktionary (kaikki.org), CC BY-SA"), "tags": r["meta"].get("tags", []), "rule": r["rule"], "review": r["review"], "parts": r.get("parts", []), "variants": VARIANTS.get(w, [])[:8], "lemma": r.get("lemma", ""), "freq": FREQ.get(unicodedata.normalize("NFC", w.lower()), 0)}
         if r["g"] == "cr": d["todo"] = 1; todo_pk.append((w, pk.get((w, n))))
         out.append(d)
     for d in out:
@@ -617,7 +703,7 @@ if __name__ == "__main__":
     if not a: sys.exit(__doc__)
     miss = [x for x in a if not os.path.exists(x)]
     if miss: sys.exit("Không tìm thấy tệp: " + ", ".join(miss) + "\nKiểm tra tên tệp và thư mục đang đứng khi chạy lệnh.")
-    KEYS = {"unihan": "unihan", "cedict": "cedict", "phienam": "phienam", "chinese-hanviet": "tsv", "ktraditionalvariant": "tvar", "opensubs": "freq"}
+    KEYS = {"unihan": "unihan", "cedict": "cedict", "phienam": "phienam", "chinese-hanviet": "tsv", "ktraditionalvariant": "tvar", "opensubs": "freq", "sidwell": "sidwell", "thanhngu": "idioms"}
     miss = [x for x in a if not os.path.exists(x)]
     if miss: sys.exit("Không tìm thấy tệp: " + ", ".join(miss))
     extra, files = {}, []

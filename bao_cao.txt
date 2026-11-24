@@ -1,12 +1,12 @@
-Tổng số mục: 25931
+Tổng số mục: 25957
 Số dòng đọc được theo định dạng: {'tiếng Việt': 38803, 'tiếng Anh': 31771}
 Bỏ qua: {'tên riêng': 1203, 'biến thể (thành mục riêng, có liên kết)': 1875, 'mục chữ Hán/Nôm': 6127}
 
 
-Theo quy tắc: R0=5506, R6=1590, R3=1568, R4f=63, R1a=970, R1a+U=3798, R5c=782, R3d=225, R4c=1434, R6r=1451, R3f=279, R4g=126, R2b=370, R4b=1965, R5=1826, R6o=39, R1b=746, R1g=4, R2a=279, R1h=24, R1f=806, R1i=1104, R1k=168, R4a=104, R2g=3, R2d=151, R2c=141, R4e=36, R1e=38, R1c=1, R2f=169, R2e=68, R4d=75, T1=13, R5b=9
-Cần người rà: 5241
-Chờ điền: 5506
-Trong số chờ điền: 2053 mục nhiều âm tiết (giữ nguyên vì không bẻ được), 3453 mục một âm tiết.
+Theo quy tắc: R0=3809, R6=1590, R3=1568, R4f=63, R1a=982, R1a+U=3786, R5c=695, R3d=225, R5d=1554, R4c=1462, R6r=1441, R3f=282, R2b=370, R4b=1965, R5=1826, R5e=225, R6o=39, R1b=746, S2=7, R2a=279, R1h=24, R1f=804, R1i=1103, R1m=133, R1k=168, R4a=104, R2g=3, R2d=151, R1g=3, R2c=141, R4e=36, R1e=38, R1c=1, R2f=169, R2e=68, R4d=75, T1=13, R5b=9
+Cần người rà: 6850
+Chờ điền: 3809
+Trong số chờ điền: 351 mục nhiều âm tiết (giữ nguyên vì không bẻ được), 3458 mục một âm tiết.
 
 Danh mục hay gặp trong Wiktionary tiếng Việt (để bổ sung quy tắc):
   38748  Mục từ tiếng Việt

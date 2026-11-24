@@ -1,201 +1,25 @@
-287 mục chờ điền nhiều âm tiết mà MỌI âm tiết đều có âm Hán Việt (chưa khớp CC-CEDICT). Mẫu 200:
-a lê
-ai hoài
-ai lê
-ai lại
-an toàn dữ liệu
-ba bị
-ba cùng
-ba lông
-biểu thức chính quy
-bác sĩ nhi
-bách bổ
-bán công
-báng bổ
-báng thần
+24 mục chờ điền nhiều âm tiết mà MỌI âm tiết đều có âm Hán Việt (chưa khớp CC-CEDICT). Mẫu 200:
 bãi nại
-bí bách
-bí tỉ
-băng đô
-bạc ác
-bằng hữu chi giao
-bệ kiến
-bố khỉ
-bốc đoán
-bốc đồng
-bồ bồ
-bồ chính
-bồ kết
-bổ bán
 bộ chỉ huy
-bột bán
-bức bí
-chi chiết
-chiêu liêu
-chiêu quân
-chiêu ấn
-chiết áp
-chuẩn không cần chỉnh
-chí ác
-chính khoá
-chấm phá
-chế áp
-cung quăng
 cá diêu hồng
-cá hố
-cá lạc
-cá măng
-cá nguyệt
 cá ngão
-cá quả
-cáo lỗi
-cô đồng
 công nhật
-công quỹ
-cù kì
-cưỡng hôn
-cả cục
-cấn cái
-cần ích
-cẩn chí
-cẩn tắc
-cốc đán
-cổ cánh
-cổ học
-củ từ
-củ ấu
-cử ai
-dao lưu
 dũ xuất dũ kì
 gia chi dĩ
-già cốc
-giá dụ
-giải vấn
-hai tiên
-hiếu hỉ
-hoang liêu
-huyện hàm
-huấn nghệ
-hàn mặc
-hôn phu
-hôn thê
-hý thuỷ
-hư hàm
-hương cả
-hương mục
-hương ẩm
-hạ liêu
-hạ nang
-hất hàm
-hầu bóng
-hậu tra
-hồ trăn
-hổ trướng
-hộ lại
-hội ngộ chi kỳ
-hỷ tín
 khang cát
-khi không
-khoan hòa
-khoan khoái
-khách man
-khái toán
 khâm kỳ
-không sao
-khố lục
-khởi mông
-khủng hoảng chu kỳ
-kinh tế tri thức
-kiết sử
-kiết xác
-kí chú viên
-kỳ bí
-kỳ cùng
-kỳ mưu
-kỳ mục
-kỳ thuỷ
-lan nhai
-linh đan
-liên ba
-liêu điêu
 luân xa
-lâm kỳ
 lãn công
-lăng quăng
-lưu đồ
-lại cái
-lễ chiêu
-lỗ mỗ
-lỗ đáo
 lục lạo
-lục phù
-lục trình
-lực lượng thứ ba
 mai điểu
-mang tai
-mạt pháp
-mạt vận
-mặc cả
-mặc sức
-mặc tình
-mặc ý
-mệnh giá
-một thể
-một thời
-nam tử tu mi
-nanh ác
-nghênh hôn
-ngôn hành lục
-ngải đắng
-ngọc lục bảo
-ngục tối
-nha đam
-nhị hỉ
-nữ sức
-phong dao
-phá bản
-phá kiêu
-phát sáng
-phân đồ
-phạm đồ
-phỉ sức
-phụ công
-phục dựng
-phụng vụ
 quy hoạch đô thị
-quán chỉ
-sang số
-sang đoạt
-sang độc
 sao đẩu
-siêu thức
-song tiện
-sung sức
-sàng đông
-sào ngư
-sá bao
-sá chi
-sá quản
-sáng lạng
 sáo sậu
-sân lai
-sân si
-sóc cảnh
-súng ống
-sơn tràng
-số một
-tai ác
-tam bành
-tam giác tù
-tam hợp
-tao nhân
-tao đàn
-thai dựng
-thiếu da
-thuật lại
-thân cô thế cô
-thính tai
-thôi tra
-thông diễn
-thông liên thất
-thông lân
+thập tự chinh
+thối hoăng
+tác phong chỉ huy
+túc chí
+túc khiên
+tứ túc mai hoa
+u hiển
+đại lãn
