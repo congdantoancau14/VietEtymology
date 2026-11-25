@@ -1,6 +1,6 @@
 24 mục chờ điền nhiều âm tiết mà MỌI âm tiết đều có âm Hán Việt (chưa khớp CC-CEDICT). Mẫu 200:
 bãi nại
-bộ chỉ huy
+cang nghị
 cá diêu hồng
 cá ngão
 công nhật
@@ -8,16 +8,16 @@ dũ xuất dũ kì
 gia chi dĩ
 khang cát
 khâm kỳ
+luyên thuyên
 luân xa
 lãn công
 lục lạo
 mai điểu
-quy hoạch đô thị
 sao đẩu
 sáo sậu
 thập tự chinh
 thối hoăng
-tác phong chỉ huy
+trợ huấn
 túc chí
 túc khiên
 tứ túc mai hoa

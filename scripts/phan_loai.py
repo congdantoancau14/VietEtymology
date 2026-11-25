@@ -63,7 +63,9 @@ RX_VAR = [(re.compile(x, re.I), sb) for x, sb in (
     (r"^(?:từ |dạng )?sai chính tả của (.+?)\.?$", "Sai chính tả"),
     (r"^censored spelling of (.+?)\.?$", "Dạng viết khác"),
     (r"^eye dialect spelling of ([^,]+?)(?:,.*)?\.?$", "Phương ngữ"),
-    (r"^[a-z ]*vietnam[a-z ]* form of (.+?)(?: \(.*)?\.?$", "Phương ngữ"))]
+    (r"^[a-z ]*vietnam[a-z ]* form of (.+?)(?: \(.*)?\.?$", "Phương ngữ"),
+    (r"^(?:biến âm|đọc trại|nói trại) (?:của|từ) (.+?)\.?$", "Biến âm"),
+    (r"^[A-ZĐ][^()]{0,50}? form of (.+?)(?: \(.*)?\.?$", "Phương ngữ"))]
 VIET_HOA = {"gương": "鏡", "về": "回", "goá": "寡", "vẹn": "完", "cầu": "橋", "vợ": "婦", "giường": "床", "sức": "力",
             "đền": "殿", "cướp": "劫", "giống": "種", "trồng": "種", "giồng": "種", "thuê": "稅"}   # bảng tham chiếu từ Wikipedia tiếng Việt, cần đối chiếu nguồn học thuật
 LANGNAME = {"fr": "Pháp", "en": "Anh", "ru": "Nga", "de": "Đức", "ja": "Nhật", "ko": "Triều Tiên", "zh": "Trung Quốc", "yue": "Quảng Đông",
@@ -77,7 +79,7 @@ RX_ALIAS = re.compile(r"^dạng (chữ hán|nôm) của (.+)$", re.I)
 TONE_ID = {"\u0300": "1", "\u0301": "2", "\u0309": "3", "\u0303": "4", "\u0323": "5"}
 TONES = {"\u0300", "\u0301", "\u0303", "\u0309", "\u0323"}
 ONS = sorted(["ngh", "ng", "nh", "ph", "th", "tr", "ch", "kh", "gh", "gi", "qu", "b", "c", "d", "đ", "g", "h", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "x"], key=len, reverse=True)
-SCORE = {"R1h": 5, "S2": 6, "R1m": 1, "R5d": 1, "R5e": 2, "R1k": 4, "R3f": 1, "R1i": 1, "R1j": 1, "R6": 2, "R6r": 1, "R6o": 2, "R4f": 2, "R4g": 1, "R5c": 1, "R2g": 1, "T1": 4, "R1c": 4, "R1e": 4, "R1f": 4, "R4c": 1, "R4d": 3, "R4e": 1, "R2a": 6, "R2b": 6, "R1a+U": 6, "R1a": 5, "R1b": 5, "R2c": 4, "R2d": 3, "R2e": 2, "R2f": 6, "R3d": 4, "R3": 4, "R4a": 3, "R4b": 3, "R5": 2, "R5b": 1, "R0": 0}
+SCORE = {"R1h": 5, "R2h": 1, "R4h": 1, "R1n": 1, "R5g": 1, "S2": 6, "R1m": 1, "R5d": 1, "R5e": 2, "R1k": 4, "R3f": 1, "R1i": 1, "R1j": 1, "R6": 2, "R6r": 1, "R6o": 2, "R4f": 2, "R4g": 1, "R5c": 1, "R2g": 1, "T1": 4, "R1c": 4, "R1e": 4, "R1f": 4, "R4c": 1, "R4d": 3, "R4e": 1, "R2a": 6, "R2b": 6, "R1a+U": 6, "R1a": 5, "R1b": 5, "R2c": 4, "R2d": 3, "R2e": 2, "R2f": 6, "R3d": 4, "R3": 4, "R4a": 3, "R4b": 3, "R5": 2, "R5b": 1, "R0": 0}
 STOP = {"the", "and", "for", "with", "one", "who", "that", "are", "was", "his", "her", "its", "used", "from", "into", "not",
         "of", "to", "or", "in", "as", "be", "an", "như", "của", "là", "một", "các", "có", "và", "để", "trong", "được",
         "những", "cái", "người", "thì", "với", "khi", "này", "đó", "nói", "chung", "hoặc", "cho", "không", "bị", "đã", "sẽ", "rất"}
@@ -292,6 +294,9 @@ def classify_en(e, w, hv):
         sub = "Việt–Mường" if "mtq" in codes and not codes & (VIETIC - {"mtq"}) else "Vietic"
         r.update(g="kt", sub=sub, conf=2, rule="R2d", review=True, decomp=False,
                  note="Có đồng nguyên trong nhóm Vietic (theo Wiktionary), chưa thấy đối ứng ngoài nhóm. Cần rà: có thể là vay từ tiếng Việt sang Mường.")
+    elif re.search(r"Attested as (?:bl|tl|ml|kl)\w*", txt):
+        r.update(g="kt", sub="Việt–Mường", conf=1, rule="R2h", review=True, decomp=False,
+                 note="Có dạng cổ với phụ âm đầu ghép (bl-, tl-, ml-, kl-) trong từ điển thế kỷ 17; giả định là từ kế thừa. Cần rà.")
     elif codes & TAI:
         r.update(g="vay", sub="Tày–Thái", conf=1, rule="R2e", review=True, decomp=False,
                  note="Có đồng nguyên Tày–Thái; hướng vay hoặc gốc chung chưa rõ. Cần rà.")
@@ -308,7 +313,7 @@ def classify_en(e, w, hv):
             elif re.search(r"reduplicat", txt, re.I) or {"vi-etym-redup", "rdp"} & set(names):
                 r.update(g="ns", sub="Từ láy", conf=2, rule="R4b", decomp=False)
             elif COMPOUND & set(names):
-                if len(w.split()) > 1: r.update(g="ns", sub="Từ ghép", conf=2, rule="R5")
+                if len(w.split()) > 1: r.update(g="ns", sub="Từ ghép", conf=2, rule="R5", note="Wiktionary xếp là từ ghép (mẫu com/af hoặc danh mục Từ ghép của trang); chưa đối chiếu độc lập.")
                 else: r.update(g="ns", sub="Từ ghép", conf=2, rule="R5b", decomp=False, note="Ghép từ các yếu tố có sẵn, viết liền hoặc nối bằng gạch nối.")
     return r
 
@@ -317,6 +322,7 @@ def classify_vi(e, w, hv):
     txt = " ".join(e.get("etymology_texts") or []).replace("__NOEDITSECTION__", "").strip()
     cj = " | ".join(e.get("categories") or []).lower()   # LƯU Ý: danh mục là của CẢ TRANG, không riêng mục này
     r, multi = new_r(), len(w.split()) > 1
+    r["hvpage"] = "mục từ hán-việt" in cj
     if re.search(r"âm hán[- ]việt|^phiên âm từ chữ hán", txt, re.I):        # bằng chứng của riêng mục này
         r.update(g="han", sub="Hán Việt", conf=2, rule="R1a", hvsyl=True, note="Wiktionary ghi là âm Hán Việt.")
         return r
@@ -357,7 +363,7 @@ def classify_vi(e, w, hv):
         r.update(g="han", sub="Hán Việt", conf=2, rule="R1c", hvsyl=True,
                  note="Trang có mục Hán Việt và mọi âm tiết đều có âm Hán Việt trong Unihan.")
     elif ("từ ghép" in cj or " + " in txt) and multi:
-        r.update(g="ns", sub="Từ ghép", conf=2, rule="R5")
+        r.update(g="ns", sub="Từ ghép", conf=2, rule="R5", note="Wiktionary xếp là từ ghép (mẫu com/af hoặc danh mục Từ ghép của trang); chưa đối chiếu độc lập.")
     return r
 
 
@@ -386,6 +392,7 @@ def merge(a, b):
     if lo["rule"] != "R0" and (lo["g"], lo["sub"]) != (hi["g"], hi["sub"]):
         hi["review"] = True
         hi["note"] = (hi["note"] + " " if hi["note"] else "") + "Nguồn khác cho nhãn khác: " + lo["sub"] + "."
+    hi["hvpage"] = bool(hi.get("hvpage") or lo.get("hvpage"))
     for k in ("recon", "cog", "dbl"):
         if not hi[k] and lo[k]: hi[k] = lo[k]
     for k, v in lo["meta"].items():
@@ -571,9 +578,10 @@ def main(paths, unihan=None, cedict=None, phienam=None, tsv=None, tvar=None, fre
             r.update(g="han", sub="Hán Việt Việt hoá", conf=2 if hit else 1, rule="T1", review=True, decomp=False,
                      note="Theo bảng tham chiếu (Wikipedia tiếng Việt, “Từ Hán-Việt”): âm Việt hoá của chữ " + vh + ". Phân loại cổ/Việt hoá còn khác nhau giữa các nguồn; cần đối chiếu. Đồng âm dị nghĩa có thể gán nhầm.")
             if not r["meta"]["han"]: r["meta"]["han"] = vh
-        if r["rule"] == "R0" and IDI and " ".join(canon(x) for x in re.findall(r"[^\W\d_]+", w.lower())) in IDI:
+        if r["rule"] in ("R0", "R5", "R5b", "R4b") and IDI and " ".join(canon(x) for x in re.findall(r"[^\W\d_]+", w.lower())) in IDI:
+            was = r["sub"] if r["rule"] != "R0" else ""
             r.update(g="ns", sub="Thành ngữ, tục ngữ", conf=2, rule="R5e", decomp=False, src="Danh sách thành ngữ/tục ngữ do người dùng cung cấp",
-                     note="Có trong từ điển thành ngữ, tục ngữ.")
+                     note="Có trong từ điển thành ngữ, tục ngữ." + (f" Wiktionary xếp là “{was}”; ưu tiên từ điển thành ngữ." if was else ""))
         if r["rule"] == "R0" and HVW:
             kk = " ".join(canon(x) for x in w.split())
             if kk in HVW:
@@ -592,11 +600,13 @@ def main(paths, unihan=None, cedict=None, phienam=None, tsv=None, tvar=None, fre
             r.update(g="tt", sub="Tượng thanh", conf=1, rule="R4e", review=True, decomp=False, note="Suy từ lời giải nghĩa (“mô phỏng…”). Cần rà.")
         elif r["rule"] == "R0" and "tượng hình" in gl0:
             r.update(g="tt", sub="Tượng hình", conf=1, rule="R4e", review=True, decomp=False, note="Lời giải nghĩa nhắc đến “tượng hình”. Cần rà.")
+        if r["rule"] == "R0" and (not w[:1].isalpha() or re.search(r"\d", w)):
+            r.update(g="ns", sub="Viết tắt, rút gọn", conf=1, rule="R4h", review=True, decomp=False, note="Bắt đầu bằng số hoặc ký hiệu, hoặc có chữ số: xếp tạm vào viết tắt/ký hiệu; không phải từ thông thường.")
         if r["rule"] == "R0":
             raw = r["meta"]["gloss"].strip()
             mref = re.match(r"^(?:Xem|Như|Đồng nghĩa của|Cũng như|same as|synonym of)\s+(.+?)\.?$", re.sub(r"^\([^)]*\)\s*", "", raw), re.I)
             mdia = re.match(r"^Từ (?:miền|phương ngữ) (?:Nam|Bắc|Trung)[^ ]* chỉ (.+?)\.?$", raw)
-            mabb = re.match(r"^(?:abbreviation of|clipping of|short for|viết tắt của|rút gọn của)\s+(.+?)\.?$", raw, re.I)
+            mabb = re.match(r"^(?:(?:dạng )?viết tắt(?: của)?|(?:dạng )?rút gọn(?: của)?|abbreviation of|initialism of|acronym of|clipping of|short for|contraction of)\s+(.+?)\.?$", raw, re.I) or re.search(r"[“\"]?([^“”\"]{1,40}?)[”\"]?\s+(?:nói tắt|viết tắt)", raw)
             if mdia: r.update(g="bt", sub="Phương ngữ", conf=2, rule="R6", decomp=False, lemma=mdia.group(1), note="Từ phương ngữ chỉ “" + mdia.group(1) + "”.")
             elif re.match(r"^\((?:phương ngữ|đphg)\b", raw, re.I): r.update(g="bt", sub="Phương ngữ", conf=1, rule="R6", decomp=False, lemma=(mref.group(1) if mref else ""), note="Giải nghĩa đánh dấu phương ngữ.")
             elif mref: r.update(g="bt", sub="Tham chiếu từ khác", conf=1, rule="R6r", decomp=False, lemma=mref.group(1), note="Wiktionary giải nghĩa bằng cách tham chiếu tới “" + mref.group(1) + "”.")
@@ -604,10 +614,7 @@ def main(paths, unihan=None, cedict=None, phienam=None, tsv=None, tvar=None, fre
             elif r["meta"].get("pos") in ("phrase", "proverb"): r.update(g="ns", sub="Thành ngữ, tục ngữ", conf=2, rule="R5c", decomp=False, note="Wiktionary xếp là cụm từ/thành ngữ/tục ngữ.")
         if r["rule"] == "R0" and len(w.split()) == 1 and re.match(r"^(?:bl|tl|ml|kl)[aăâeêioôơuưy]{1,3}(?:ng|nh|ch|[cmnpt])?$", canon(w, False)):
             r.update(g="kt", sub="Việt–Mường", conf=1, rule="R2g", review=True, decomp=False, note="Phụ âm đầu ghép kiểu tiếng Việt cổ (bl-, tl-, ml-, kl-); giả định là từ kế thừa. Cần rà.")
-        if r["rule"] == "R0" and HVSYL and is_lay(w) and not all_hv(w):
-            r.update(g="ns", sub="Từ láy", conf=1, rule="R4c", review=True, decomp=False,
-                     note="Suy từ cấu trúc ngữ âm (trùng âm đầu hoặc vần), không phải Wiktionary khẳng định. Cần rà.")
-        if r["rule"] == "R0" and ((("-" in w) and not w.startswith("-") and not w.endswith("-") and not re.search(r"\d", w)) or re.search(r"[fjwz]", w.lower()) or foreign_form(w)):
+        if r["rule"] == "R0" and len(w.split()) == 1 and ((("-" in w) and not w.startswith("-") and not w.endswith("-") and not re.search(r"\d", w)) or re.search(r"[fjwz]", w.lower()) or foreign_form(w)):
             r.update(g=CHUARO[0], sub=CHUARO[1], conf=1, rule="R3f", review=True, decomp=False,
                      note="Hình thức chữ viết không giống âm tiết tiếng Việt (gạch nối kiểu phiên âm, chữ cái f/j/w/z, hoặc cấu trúc âm tiết lạ): nhiều khả năng vay từ ngoại ngữ, chưa rõ ngôn ngữ nguồn.")
         if len(w.split()) > 1:
@@ -634,15 +641,51 @@ def main(paths, unihan=None, cedict=None, phienam=None, tsv=None, tvar=None, fre
             r.update(g="han", sub="Nghi là Hán Việt (suy luận)", conf=1, rule="R1i", review=True, hvsyl=True,
                      note="Mọi âm tiết đều có âm Hán Việt (Unihan) và không âm tiết nào xuất hiện như từ bản địa đứng riêng trong dữ liệu. Chưa có bằng chứng trực tiếp; không tính vào số Hán Việt.")
     SINGLE = {canon(w): r for (w, n), r in atoms.items() if " " not in w and "-" not in w}
-    for (w, n), r in atoms.items():                      # ghép từ các từ đơn đã có
+    HEAD = {" ".join(canon(x) for x in w.split()): r for (w, n), r in atoms.items()}
+
+    def segment(ps):
+        """Tách các âm tiết thành các đoạn liên tiếp, mỗi đoạn là một đầu mục đã có; ưu tiên ít đoạn nhất."""
+        best = [None] * (len(ps) + 1); best[0] = []
+        for i in range(len(ps)):
+            if best[i] is None: continue
+            for j in range(i + 1, len(ps) + 1):
+                key = " ".join(canon(x) for x in ps[i:j])
+                if key in HEAD and not (i == 0 and j == len(ps)):
+                    cand = best[i] + [(i, j, key)]
+                    if best[j] is None or len(cand) < len(best[j]): best[j] = cand
+        return best[-1]
+
+    for (w, n), r in atoms.items():
         ps = w.split()
-        if r["rule"] == "R0" and len(ps) > 1 and all(canon(x) in SINGLE for x in ps):
-            if all(SINGLE[canon(x)]["g"] == "han" for x in ps):
+        if r["rule"] != "R0": continue
+        if len(ps) == 1:                                  # từ đơn: âm Hán Việt + trang Hán-Việt của Wiktionary
+            if r.get("hvpage") and canon(w) in HVSYL:
+                r.update(g="han", sub="Nghi là Hán Việt (suy luận)", conf=1, rule="R1n", review=True, hvsyl=True,
+                         note="Âm tiết có âm Hán Việt và trang Wiktionary tiếng Việt có mục Hán Việt cùng âm; chưa có bằng chứng riêng cho mục này (có thể là đồng âm bản địa).")
+            continue
+        foreign = [x for x in ps if "-" in x or re.search(r"[fjwz]", x.lower()) or not RX_SYL.match(canon(x, False))]
+        segs = segment(ps)
+        if segs:
+            parts = [" ".join(ps[i:j]) for i, j, _ in segs]
+            kinds = [HEAD[k]["g"] for _, _, k in segs]
+            if all(k == "han" for k in kinds):
                 r.update(g="han", sub="Nghi là Hán Việt (suy luận)", conf=1, rule="R1m", review=True, hvsyl=True, decomp=False,
-                         note="Ghép từ các từ đơn đã xác định thuộc nhóm Hán: " + " + ".join(ps) + ". Chưa có bằng chứng trực tiếp.")
+                         note="Ghép từ các đầu mục đã xác định thuộc nhóm Hán: " + " + ".join(parts) + ". Chưa có bằng chứng trực tiếp.")
             else:
-                r.update(g="ns", sub="Từ ghép", conf=1, rule="R5d", review=True, decomp=False,
-                         note="Ghép từ các từ đơn đã có trong từ điển: " + " + ".join(ps) + ". Chưa loại trừ khả năng là từ vay phiên âm.")
+                alt = list(dict.fromkeys((HEAD[k]["g"], HEAD[k]["sub"]) for _, _, k in segs
+                                         if HEAD[k]["g"] in ("vay", "han") and not HEAD[k]["sub"].startswith("Nghi")))
+                r.update(g="ns", sub="Từ ghép", conf=1, rule="R5d", review=True, decomp=False, alt=alt,
+                         note="Ghép từ các đầu mục đã có: " + " + ".join(parts) + (". Có thành tố vay: nhãn vay được thêm." if alt else ". Chưa loại trừ khả năng là từ vay phiên âm."))
+        elif foreign:
+            if len(foreign) < len(ps):
+                r.update(g="ns", sub="Từ ghép", conf=1, rule="R5g", review=True, decomp=False, alt=[CHUARO],
+                         note="Có yếu tố ngoại lai (" + ", ".join(foreign) + ") ghép với từ Việt; chưa rõ ngôn ngữ nguồn.")
+            else:
+                r.update(g=CHUARO[0], sub=CHUARO[1], conf=1, rule="R3f", review=True, decomp=False,
+                         note="Mọi âm tiết đều không giống âm tiết tiếng Việt: nhiều khả năng vay ngoại ngữ, chưa rõ ngôn ngữ nguồn.")
+        elif len(ps) in (2, 4) and HVSYL and is_lay(w) and not all_hv(w) and any(canon(x) not in SINGLE for x in ps):
+            r.update(g="ns", sub="Từ láy", conf=1, rule="R4c", review=True, decomp=False,
+                     note="Suy từ cấu trúc ngữ âm (trùng âm đầu hoặc vần) và có âm tiết không đứng riêng được; không phải Wiktionary khẳng định. Cần rà.")
     have = {w for w, _ in atoms}
     for s, lst in stubs.items():
         if s in have: continue
