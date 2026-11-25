@@ -139,10 +139,10 @@ const G={
 kt:["Kế thừa",["Nam Á","Vietic","Việt–Mường"]],
 han:["Vay Hán",["Hán Việt cổ","Hán Việt","Hán Việt Việt hoá","Vay Hán muộn","Vay Hán (chưa rõ tầng)","Nghi là Hán Việt (suy luận)"]],
 vay:["Vay khác",["Tày–Thái","Chăm, Mã Lai, Khmer","Tiếng Pháp","Tiếng Anh","Tiếng Nga","Châu Âu khác","Phạn, Pali, Ấn Độ","Nhật, Triều Tiên","Chưa rõ ngôn ngữ nguồn","Ngôn ngữ khác"]],
-ns:["Nội sinh",["Từ ghép","Từ láy","Viết tắt, rút gọn","Từ lóng, khẩu ngữ","Thành ngữ, tục ngữ","Chuyển loại, chuyển nghĩa","Phụ tố cổ"]],
+ns:["Nội sinh",["Từ ghép","Từ láy","Viết tắt, rút gọn","Thành ngữ, tục ngữ","Chuyển loại, chuyển nghĩa","Phụ tố cổ"]],
 tt:["Tượng thanh, tượng hình",["Tượng thanh","Tượng hình"]],
 cr:["Chưa xác định",["Một âm tiết","Nhiều âm tiết"]],
-bt:["Biến thể và tham chiếu",["Bỏ dấu kiểu cũ","Sai chính tả","Dạng viết khác","Phương ngữ","Tham chiếu từ khác"]]};
+bt:["Biến thể và tham chiếu",["Bỏ dấu kiểu cũ","Sai chính tả","Dạng viết khác","Phương ngữ","Biến âm","Tham chiếu từ khác"]]};
 const CONF=["Chưa xác định","Đang tranh luận","Có khả năng","Chắc chắn"];
 const SEED=[
 {id:"ngua",w:"ngựa",gloss:"động vật họ ngựa",L:[["han","Hán Việt cổ"]],conf:2,doublets:["ma"],note:"Gốc chữ 馬. Ví dụ minh hoạ, cần kiểm chứng thời điểm vay."},
@@ -171,12 +171,13 @@ let BASE=SEED,APPR=[],PEND=[],db=null,DBOK=false,META_TS=0;
 const vp=$("#vp"),sp=$("#sp"),rows=$("#rows");
 const dots=n=>"●".repeat(n+1)+"○".repeat(3-n);
 const nf=n=>n.toLocaleString("vi");
-function prep(){{const m=new Map();BASE.concat(APPR,PEND,DBOK?[]:user).forEach(e=>m.set(e.id,e));ALL=[...m.values()]}ALL.forEach(e=>{e._n=norm(e.w+" "+(e.han||"")+" "+(e.cjk||[]).join(" "));e._g=e.L[0][0]});ALL.sort((a,b)=>COL.compare(a.w,b.w));BYID=new Map(ALL.map(e=>[e.id,e]));ALL.forEach(e=>e.L.forEach(l=>{if(G[l[0]]&&!G[l[0]][1].includes(l[1]))G[l[0]][1].push(l[1])}))}
+function prep(){{const m=new Map();BASE.concat(APPR,PEND,DBOK?[]:user).forEach(e=>m.set(e.id,e));ALL=[...m.values()]}ALL.forEach(e=>{e._w=norm(e.w);e._n=norm(e.w+" "+(e.han||"")+" "+(e.cjk||[]).join(" "));e._g=e.L[0][0]});ALL.sort((a,b)=>COL.compare(a.w,b.w));BYID=new Map(ALL.map(e=>[e.id,e]));ALL.forEach(e=>e.L.forEach(l=>{if(G[l[0]]&&!G[l[0]][1].includes(l[1]))G[l[0]][1].push(l[1])}))}
 function compute(){
   const q=norm(F.q);gc={};sc={};
   base=ALL.filter(e=>(!q||e._n.includes(q))&&(F.c===""||e.conf==F.c)&&(F.t===""||(F.t==="todo")===!!e.todo)&&(!F.r||e.review)&&(F.tg===""||(e.tags||[]).includes(F.tg)));
   base.forEach(e=>{gc[e._g]=(gc[e._g]||0)+1;e.L.forEach(l=>sc[l[1]]=(sc[l[1]]||0)+1)});
   R=base.filter(e=>!F.s.size||e.L.some(l=>F.s.has(l[1])));
+  if(q){const sc=e=>e._w===q?0:e._w.startsWith(q)?1:(" "+e._w+" ").includes(" "+q+" ")?2:3;R=R.map(e=>[sc(e),e]).sort((a,b)=>a[0]-b[0]).map(x=>x[1])}
 }
 const row=e=>'<div class="r '+e._g+(e.id===SEL?' sel':'')+'" role="row" tabindex="0" data-id="'+esc(e.id)+'"><b>'+esc(e.w)+(e.han?'<span class="hz">'+esc(e.han)+'</span>':'')+'</b><span class="chip '+e._g+'">'+esc(e.L[0][1])+'</span><span class="dots" title="'+CONF[e.conf]+'">'+dots(e.conf)+'</span><span class="nt">'+esc(e.todo?"chờ điền":(e.recon||e.note||""))+'</span></div>';
 function paint(){
@@ -213,7 +214,7 @@ function showD(){
   d.className="d "+e._g;
   d.innerHTML='<button class="x" data-x="close" aria-label="Đóng">×</button><h2>'+esc(e.w)+(e.user?' <span class="tag">chưa duyệt</span>':"")+(e.todo?' <span class="tag">chờ điền</span>':"")+'</h2>'
    +'<p class="mute" style="margin:4px 0 10px">'+esc(e.gloss)+'</p><div style="display:flex;flex-wrap:wrap;gap:6px">'+e.L.map(l=>'<span class="chip '+l[0]+'">'+G[l[0]][0]+' › '+esc(l[1])+'</span>').join("")+'</div>'
-   +'<dl><dt>Chữ Hán gốc</dt><dd class="hz">'+E(e.han)+'</dd><dt>Dạng viết CJK</dt><dd class="hz">'+E((e.cjk||[]).join("  "))+'</dd><dt>Phát âm</dt><dd>'+E(e.ipa)+'</dd><dt title="Số lần xuất hiện trong phụ đề phim (OpenSubtitles)">Tần suất</dt><dd>'+(e.freq?nf(e.freq):E(""))+'</dd><dt>Độ tin cậy</dt><dd><span class="dots">'+dots(e.conf)+'</span> '+CONF[e.conf]+(e.review?' · cần rà soát':'')+'</dd><dt>Dạng tái lập</dt><dd>'+E(e.recon)+'</dd><dt>Đồng nguyên</dt><dd>'+E(e.cog)+'</dd><dt>Cặp song song</dt><dd>'+(lk(e.doublets)||E(""))+'</dd><dt>Thành tố</dt><dd>'+(lk(e.parts)||E(""))+'</dd><dt>Biến thể</dt><dd>'+E((e.variants||[]).join(", "))+'</dd><dt>Tham chiếu</dt><dd>'+(e.lemma?(lk([e.lemma])||esc(e.lemma)):E(""))+'</dd><dt>Thẻ</dt><dd>'+((e.tags||[]).length?e.tags.map(t=>'<span class="tag" style="margin:0 4px 4px 0;display:inline-block">'+esc(t)+'</span>').join(""):E(""))+'</dd><dt>Ghi chú</dt><dd>'+E(e.note)+'</dd><dt>Nguồn</dt><dd>'+E(e.src)+'</dd><dt>Quy tắc</dt><dd>'+E(e.rule)+'</dd></dl>'+(e.pending&&e._cid?'<p style="margin-top:16px"><button class="save" data-x="ok" data-c="'+esc(e._cid)+'">Duyệt</button> <button class="ghost" data-x="rm" data-c="'+esc(e._cid)+'">Xoá</button></p>':"");
+   +'<dl><dt>Chữ Hán gốc</dt><dd class="hz">'+E(e.han)+'</dd><dt>Dạng viết CJK</dt><dd class="hz">'+E((e.cjk||[]).join("  "))+'</dd><dt>Phát âm</dt><dd>'+E(e.ipa)+'</dd><dt title="Số lần xuất hiện trong phụ đề phim (OpenSubtitles)">Tần suất</dt><dd>'+(e.freq?nf(e.freq):E(""))+'</dd><dt>Độ tin cậy</dt><dd><span class="dots">'+dots(e.conf)+'</span> '+CONF[e.conf]+(e.review?' · cần rà soát':'')+'</dd><dt>Dạng tái lập</dt><dd>'+E(e.recon)+'</dd><dt>Đồng nguyên</dt><dd>'+E(e.cog)+'</dd><dt>Cặp song song</dt><dd>'+(lk(e.doublets)||E(""))+'</dd><dt>Thành tố</dt><dd>'+(lk(e.parts)||E(""))+'</dd><dt>Biến thể</dt><dd>'+E((e.variants||[]).join(", "))+'</dd><dt>Tham chiếu</dt><dd>'+(e.lemma?(lk([e.lemma])||esc(e.lemma)):E(""))+'</dd><dt>Thẻ</dt><dd>'+((e.tags||[]).length?e.tags.map(t=>'<button type="button" class="tag" data-tg="'+esc(t)+'" title="Xem mọi từ có thẻ này" style="margin:0 4px 4px 0;display:inline-block;border:0;cursor:pointer">'+esc(t)+'</button>').join(""):E(""))+'</dd><dt>Ghi chú</dt><dd>'+E(e.note)+'</dd><dt>Nguồn</dt><dd>'+E(e.src)+'</dd><dt>Quy tắc</dt><dd>'+E(e.rule)+'</dd></dl>'+(e.pending&&e._cid?'<p style="margin-top:16px"><button class="save" data-x="ok" data-c="'+esc(e._cid)+'">Duyệt</button> <button class="ghost" data-x="rm" data-c="'+esc(e._cid)+'">Xoá</button></p>':"");
 }
 async function exp(t){
   let data,name="tu-nguyen-"+R.length+"."+t;
@@ -282,6 +283,7 @@ function go(id){if(id)location.hash=id;else{history.pushState(null,"",location.p
 $("#q").oninput=()=>{clearTimeout(T);T=setTimeout(()=>{F.q=$("#q").value;refresh()},120)};
 document.addEventListener("click",e=>{const b=e.target.closest("button,.r");if(!b)return;const D=b.dataset;
   if(D.x==="csv"||D.x==="json")return exp(D.x);
+  if(D.tg!==undefined){F.tg=D.tg;F.q="";$("#q").value="";F.s.clear();F.c=F.t="";F.r=false;go("");return refresh()}
   if(D.x==="close")return go("");
   if(D.x==="ok"||D.x==="rm")return mod(D.x,D.c);
   if(D.x==="reset"){F.s.clear();F.c=F.t="";F.r=false;F.tg="";return refresh()}
