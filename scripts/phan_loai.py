@@ -50,6 +50,8 @@ LANG_L = {k.lower(): v for k, v in LANG_VI.items()}
 RX_CAT = re.compile(r"^Từ (vay mượn|dẫn xuất|kế thừa) từ tiếng (.+) tiếng Việt$")
 RX_BOR = re.compile(r"^(?:[Tt]ừ|[Mm]ượn từ|[Vv]ay từ|[Pp]hiên âm từ|[Pp]hiên âm)\s+(?:tiếng\s+)?(" +
                     "|".join(re.escape(k) for k in sorted(LANG_VI, key=len, reverse=True)) + r")(?=[\s,:;.]|$)")
+R1N_MAXFREQ = 3000   # từ đơn âm rất thông dụng (tần suất phụ đề >= ngưỡng) không bị suy là Hán Việt
+COLLOQ = {"khẩu ngữ", "lóng", "thông tục", "phương ngữ", "thô tục", "đùa"}   # thẻ phong cách bình dân: bằng chứng ngược với Hán Việt
 HVSYL = set()          # mọi âm Hán Việt trong Unihan (điền khi chạy)
 VARIANTS = collections.defaultdict(list)   # từ lemma -> các biến thể chính tả/phương ngữ
 RX_VAR = [(re.compile(x, re.I), sb) for x, sb in (
@@ -62,6 +64,7 @@ RX_VAR = [(re.compile(x, re.I), sb) for x, sb in (
     (r"^dạng viết khác của (.+?)\.?$", "Dạng viết khác"),
     (r"^(?:từ |dạng )?sai chính tả của (.+?)\.?$", "Sai chính tả"),
     (r"^censored spelling of (.+?)\.?$", "Dạng viết khác"),
+    (r"^eggcorn of (.+?)\.?$", "Sai chính tả"),
     (r"^eye dialect spelling of ([^,]+?)(?:,.*)?\.?$", "Phương ngữ"),
     (r"^[a-z ]*vietnam[a-z ]* form of (.+?)(?: \(.*)?\.?$", "Phương ngữ"),
     (r"^(?:biến âm|đọc trại|nói trại) (?:của|từ) (.+?)\.?$", "Biến âm"),
@@ -308,7 +311,13 @@ def classify_en(e, w, hv):
                          note=("Calque từ " if "cal" in t.get("name") or "clq" in t.get("name") else "Vay từ ") + lname(arg(t, "2")) + (": " + arg(t, "3") if arg(t, "3") not in ("", "-") else ""))
                 break
         else:
-            if re.search(r"onomatopoe", txt, re.I):
+            mv = re.match(r"^(?:Variant|Alternative form) of ([^,;.]+)\.?$", txt.strip())
+            mc = re.match(r"^Clipping of ([^,;.]+)\.?$", txt.strip())
+            mh = re.search(r"adding hỏi tone to the root (\S+)", txt)
+            if mv: r.update(g="bt", sub="Dạng viết khác", conf=2, rule="R6", decomp=False, lemma=mv.group(1).strip(), note="Từ nguyên ghi là biến thể của “" + mv.group(1).strip() + "”.")
+            elif mc: r.update(g="ns", sub="Viết tắt, rút gọn", conf=2, rule="R4f", decomp=False, lemma=mc.group(1).strip(), note="Từ nguyên ghi là rút gọn của “" + mc.group(1).strip() + "”.")
+            elif mh: r.update(g="bt", sub="Phương ngữ", conf=2, rule="R6", decomp=False, lemma=mh.group(1).strip(" (“”)"), note="Từ nguyên ghi là dạng phương ngữ tạo bằng đổi thanh từ gốc.")
+            elif re.search(r"onomatopoe|imitative", txt, re.I):
                 r.update(g="tt", sub="Tượng thanh", conf=2, rule="R4a", decomp=False)
             elif re.search(r"reduplicat", txt, re.I) or {"vi-etym-redup", "rdp"} & set(names):
                 r.update(g="ns", sub="Từ láy", conf=2, rule="R4b", decomp=False)
@@ -637,7 +646,7 @@ def main(paths, unihan=None, cedict=None, phienam=None, tsv=None, tvar=None, fre
                                     note="Cách đặt dấu thanh kiểu cũ của “" + news[0][0] + "”; nguồn gốc xem ở mục đó.")
     NATIVE = {canon(w) for (w, n), r in atoms.items() if " " not in w and r["g"] not in ("han", "vay", "bt", "cr")}
     for (w, n), r in atoms.items():                      # suy luận Hán Việt: mọi âm tiết có âm Hán Việt, không âm tiết nào là từ bản địa đứng riêng
-        if r["rule"] == "R0" and len(w.split()) > 1 and all_hv(w) and not any(canon(x) in NATIVE for x in w.split()):
+        if r["rule"] == "R0" and len(w.split()) > 1 and all_hv(w) and not any(canon(x) in NATIVE for x in w.split()) and not (set(r["meta"].get("tags", [])) & COLLOQ):
             r.update(g="han", sub="Nghi là Hán Việt (suy luận)", conf=1, rule="R1i", review=True, hvsyl=True,
                      note="Mọi âm tiết đều có âm Hán Việt (Unihan) và không âm tiết nào xuất hiện như từ bản địa đứng riêng trong dữ liệu. Chưa có bằng chứng trực tiếp; không tính vào số Hán Việt.")
     SINGLE = {canon(w): r for (w, n), r in atoms.items() if " " not in w and "-" not in w}
@@ -659,7 +668,7 @@ def main(paths, unihan=None, cedict=None, phienam=None, tsv=None, tvar=None, fre
         ps = w.split()
         if r["rule"] != "R0": continue
         if len(ps) == 1:                                  # từ đơn: âm Hán Việt + trang Hán-Việt của Wiktionary
-            if r.get("hvpage") and canon(w) in HVSYL:
+            if r.get("hvpage") and canon(w) in HVSYL and not (set(r["meta"].get("tags", [])) & COLLOQ) and not (FREQ and FREQ.get(unicodedata.normalize("NFC", w.lower()), 0) >= R1N_MAXFREQ):
                 r.update(g="han", sub="Nghi là Hán Việt (suy luận)", conf=1, rule="R1n", review=True, hvsyl=True,
                          note="Âm tiết có âm Hán Việt và trang Wiktionary tiếng Việt có mục Hán Việt cùng âm; chưa có bằng chứng riêng cho mục này (có thể là đồng âm bản địa).")
             continue
@@ -667,18 +676,18 @@ def main(paths, unihan=None, cedict=None, phienam=None, tsv=None, tvar=None, fre
         segs = segment(ps)
         if segs:
             parts = [" ".join(ps[i:j]) for i, j, _ in segs]
-            kinds = [HEAD[k]["g"] for _, _, k in segs]
-            if all(k == "han" for k in kinds):
+            kinds = [HEAD[k]["sub"] for _, _, k in segs]
+            if all(k == "Hán Việt" for k in kinds):
                 r.update(g="han", sub="Nghi là Hán Việt (suy luận)", conf=1, rule="R1m", review=True, hvsyl=True, decomp=False,
                          note="Ghép từ các đầu mục đã xác định thuộc nhóm Hán: " + " + ".join(parts) + ". Chưa có bằng chứng trực tiếp.")
             else:
-                alt = list(dict.fromkeys((HEAD[k]["g"], HEAD[k]["sub"]) for _, _, k in segs
-                                         if HEAD[k]["g"] in ("vay", "han") and not HEAD[k]["sub"].startswith("Nghi")))
-                r.update(g="ns", sub="Từ ghép", conf=1, rule="R5d", review=True, decomp=False, alt=alt,
-                         note="Ghép từ các đầu mục đã có: " + " + ".join(parts) + (". Có thành tố vay: nhãn vay được thêm." if alt else ". Chưa loại trừ khả năng là từ vay phiên âm."))
+                comp = [(parts[i], HEAD[k]["g"], HEAD[k]["sub"]) for i, (_, _, k) in enumerate(segs)
+                        if HEAD[k]["g"] in ("vay", "han") and not HEAD[k]["sub"].startswith("Nghi")]
+                r.update(g="ns", sub="Từ ghép", conf=1, rule="R5d", review=True, decomp=False, comp=comp,
+                         note="Ghép từ các đầu mục đã có: " + " + ".join(parts) + (". Một số thành tố có gốc vay (xem “Thành tố vay”); nhãn đó không tính cho cả từ." if comp else ". Chưa loại trừ khả năng là từ vay phiên âm."))
         elif foreign:
             if len(foreign) < len(ps):
-                r.update(g="ns", sub="Từ ghép", conf=1, rule="R5g", review=True, decomp=False, alt=[CHUARO],
+                r.update(g="ns", sub="Từ ghép", conf=1, rule="R5g", review=True, decomp=False, comp=[(" ".join(foreign), CHUARO[0], CHUARO[1])],
                          note="Có yếu tố ngoại lai (" + ", ".join(foreign) + ") ghép với từ Việt; chưa rõ ngôn ngữ nguồn.")
             else:
                 r.update(g=CHUARO[0], sub=CHUARO[1], conf=1, rule="R3f", review=True, decomp=False,
@@ -707,7 +716,7 @@ def main(paths, unihan=None, cedict=None, phienam=None, tsv=None, tvar=None, fre
         used.add(id_); first.setdefault(w, id_)
         d = {"id": id_, "w": w, "gloss": r["meta"]["gloss"], "han": r["meta"]["han"], "cjk": r["meta"]["cjk"], "ipa": r["meta"]["ipa"], "L": [[r["g"], ("Nhiều âm tiết" if (" " in w or "-" in w) else "Một âm tiết") if r["g"] == "cr" else r["sub"]]] + [list(x) for x in r.get("alt", [])], "conf": r["conf"], "recon": r["recon"],
              "cog": "; ".join(r["cog"]), "doublets": r["dbl"], "note": r["note"],
-             "src": r.get("src", "Wiktionary (kaikki.org), CC BY-SA"), "tags": r["meta"].get("tags", []), "rule": r["rule"], "review": r["review"], "parts": r.get("parts", []), "variants": VARIANTS.get(w, [])[:8], "lemma": r.get("lemma", ""), "freq": FREQ.get(unicodedata.normalize("NFC", w.lower()), 0)}
+             "src": r.get("src", "Wiktionary (kaikki.org), CC BY-SA"), "tags": r["meta"].get("tags", []), "rule": r["rule"], "review": r["review"], "parts": r.get("parts", []), "variants": VARIANTS.get(w, [])[:8], "lemma": r.get("lemma", ""), "comp": [list(x) for x in r.get("comp", [])], "freq": FREQ.get(unicodedata.normalize("NFC", w.lower()), 0)}
         if r["g"] == "cr": d["todo"] = 1; todo_pk.append((w, pk.get((w, n))))
         out.append(d)
     for d in out:

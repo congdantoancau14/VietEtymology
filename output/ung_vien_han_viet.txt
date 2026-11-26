@@ -1,4 +1,4 @@
-24 mục chờ điền nhiều âm tiết mà MỌI âm tiết đều có âm Hán Việt (chưa khớp CC-CEDICT). Mẫu 200:
+26 mục chờ điền nhiều âm tiết mà MỌI âm tiết đều có âm Hán Việt (chưa khớp CC-CEDICT). Mẫu 200:
 bãi nại
 cang nghị
 cá diêu hồng
@@ -6,6 +6,7 @@ cá ngão
 công nhật
 dũ xuất dũ kì
 gia chi dĩ
+hề hấn
 khang cát
 khâm kỳ
 luyên thuyên
@@ -20,6 +21,7 @@ thối hoăng
 trợ huấn
 túc chí
 túc khiên
+túc thỏa
 tứ túc mai hoa
 u hiển
 đại lãn
